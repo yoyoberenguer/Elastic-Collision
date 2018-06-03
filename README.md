@@ -9,9 +9,11 @@ a real time elastic collision engine.
 
 * If you are using the trigonometry method, don't forget to inverse v1.y and v2.y before caluclation 
 e.g :
-  v1 = pygame.math.Vector2(x1, y1).normalize()   # vector v1 (object1) prior collision 
   
-  v2 = pygame.math.Vector2(x2, y2).normalize()   # vector v2 (object2) prior collision
+  vector v1 (object1) prior collision 
+  v1 = pygame.math.Vector2(x1, y1).normalize()  
+  vector v2 (object2) prior collision
+  v2 = pygame.math.Vector2(x2, y2).normalize()   
   
   v1.y *= -1
   
