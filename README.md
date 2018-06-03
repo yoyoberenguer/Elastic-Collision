@@ -1,5 +1,8 @@
-# 2DElasticCollision
-2D elastic collision engine 
+# 2D Elastic Collision 
+
+2D elastic collision engine implemented in python. 
+It contains two distinc methods (trigonometry and free angle representation). 
+Both technics have been tested and show exactly the same results. 
 
 The following classes can be easily implemented into a 2D game (top down or horizontal/vertical scrolling) to generate
 a real time elastic collision engine.
