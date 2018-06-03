@@ -24,7 +24,7 @@ __author__ = "Yoann Berenguer"
 __copyright__ = "Copyright 2007."
 __credits__ = ["Yoann Berenguer"]
 __license__ = "MIT License"
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 __maintainer__ = "Yoann Berenguer"
 __email__ = "yoyoberenguer@hotmail.com"
 __status__ = "Demo"
@@ -72,43 +72,6 @@ class Momentum:
         except ZeroDivisionError:
             return 0
 
-    # ***************************************************************
-    # Angle free representation, the changed velocities are computed
-    # using centers x1 and x2 at the time of contact.
-    # ***************************************************************
-    @staticmethod
-    def v1_vector_components_alternative(v1, v2, m1, m2, x1, x2):
-        """ scalar size v1 of the original object speed represented by (v1, m1, x1 arguments)."""
-
-        assert (m1 + m2) > 0, 'Expecting a positive mass for m1 and m2, got %s ' % (m1 + m2)
-        assert (x1 != x2), 'Expecting x1 and x2 to have different values, x1:%s, x2:%s ' % (x1, x2)
-        mass = 2 * m2 / (m1 + m2)
-        return v1 - (mass * (v1 - v2).dot(x1 - x2)/pow((x1-x2).length(), 2))*(x1 - x2)
-
-    # ***************************************************************
-    # Angle free representation, the changed velocities are computed
-    # using centers x1 and x2 at the time of contact.
-    # ***************************************************************
-    @staticmethod
-    def v2_vector_components_alternative(v1, v2, m1, m2, x1, x2):
-        """ scalar size v2 of the original object speed represented by (v2, m2, x2 arguments)."""
-
-        assert (m1 + m2) > 0, 'Expecting a positive mass for m1 and m2, got %s ' % (m1 + m2)
-        assert (x1 != x2), 'Expecting x1 and x2 to have different values, x1:%s, x2:%s ' % (x1, x2)
-        mass = 2 * m1 / (m1 + m2)
-        return v2 - (mass * (v2 - v1).dot(x2 - x1) / pow((x2 - x1).length(), 2)) * (x2 - x1)
-
-    # ************************************************************************
-    #
-    # ************************************************************************
-    @staticmethod
-    def angle_free_calculator(v1, v2, m1, m2, x1, x2):
-        v1 = Momentum.v1_vector_components_alternative(v1, v2, m1, m2, x1, x2)
-        v2 = Momentum.v2_vector_components_alternative(v1, v2, m1, m2, x1, x2)
-        return v1, v2
-
-
-
     @staticmethod
     def v1_vector_components(v1, v2, theta1, theta2, phi, m1, m2):
         """ return scalar size v1 of the original object represented by (v1, theta1, m1)
@@ -118,7 +81,7 @@ class Momentum:
         is the contact angle.
         """
         
-        assert v1 >= 0 and v2 >= 0, 'v1 and v2 are vector magnitude and cannot be < 0.'
+        assert v1 >= 0 and v2 >= 0, 'v1 and v2 are vector_position magnitude and cannot be < 0.'
         assert (m1 + m2) > 0, 'Expecting a positive mass for m1 and m2, got %s ' % (m1 + m2)
         numerator = v1 * math.cos(theta1 - phi) * (m1 - m2) + 2 * m2 * v2 * math.cos(theta2 - phi)
         v1x = numerator * math.cos(phi) / (m1 + m2) + v1 * math.sin(theta1 - phi) * math.cos(phi + math.pi / 2)
@@ -141,11 +104,11 @@ class Momentum:
         is the contact angle.
         """
 
-        assert v1 >= 0 and v2 >= 0, 'v1 and v2 are vector magnitude and cannot be < 0.'
-        assert (m1+m2) > 0, 'Expecting a positive mass for m1 and m2, got %s ' % (m1 + m2)
-        numerator = v2 * math.cos(theta2 - phi) * (m1 - m2) + 2 * m1 * v1 * math.cos(theta1 - phi)
-        v2x = numerator * math.cos(phi) / (m1 + m2) + v2 * math.sin(theta2 - phi) * math.cos(phi + math.pi / 2)
-        v2y = numerator * math.sin(phi) / (m1 + m2) + v2 * math.sin(theta2 - phi) * math.sin(phi + math.pi / 2)
+        assert v1 >= 0 and v2 >= 0, 'v1 and v2 are vector_position magnitude and cannot be < 0.'
+        assert (m1 + m2) > 0, 'Expecting a positive mass for m1 and m2, got %s ' % (m1 + m2)
+        numerator = v2 * math.cos(theta2 - phi) * (m2 - m1) + 2 * m1 * v1 * math.cos(theta1 - phi)
+        v2x = numerator * math.cos(phi) / (m2 + m1) + v2 * math.sin(theta2 - phi) * math.cos(phi + math.pi / 2)
+        v2y = numerator * math.sin(phi) / (m2 + m1) + v2 * math.sin(theta2 - phi) * math.sin(phi + math.pi / 2)
         if math.isclose(v2x, 0.1e-10, abs_tol=1e-10):
             v2x = 0.0
         if math.isclose(v2y, 0.1e-10, abs_tol=1e-10):
@@ -222,6 +185,45 @@ class Momentum:
 
         return v2
 
+    # ****************************** ANGLE FREE METHOD *******************************************
+
+
+    # ***************************************************************
+    # Angle free representation, the changed velocities are computed
+    # using centers x1 and x2 at the time of contact.
+    # ***************************************************************
+    @staticmethod
+    def v1_vector_components_alternative(v1, v2, m1, m2, x1, x2):
+        """ scalar size v1 of the original object speed represented by (v1, m1, x1 arguments)."""
+
+        assert (m1 + m2) > 0, 'Expecting a positive mass for m1 and m2, got %s ' % (m1 + m2)
+        assert (x1 != x2), 'Expecting x1 and x2 to have different values, x1:%s, x2:%s ' % (x1, x2)
+        mass = 2 * m2 / (m1 + m2)
+        return v1 - (mass * (v1 - v2).dot(x1 - x2)/pow((x1 - x2).length(), 2)) * (x1 - x2)
+
+    # ***************************************************************
+    # Angle free representation, the changed velocities are computed
+    # using centers x1 and x2 at the time of contact.
+    # ***************************************************************
+    @staticmethod
+    def v2_vector_components_alternative(v1, v2, m1, m2, x1, x2):
+        """ scalar size v2 of the original object speed represented by (v2, m2, x2 arguments)."""
+
+        assert (m1 + m2) > 0, 'Expecting a positive mass for m1 and m2, got %s ' % (m1 + m2)
+        assert (x1 != x2), 'Expecting x1 and x2 to have different values, x1:%s, x2:%s ' % (x1, x2)
+        mass = 2 * m1 / (m1 + m2)
+        return v2 - (mass * (v2 - v1).dot(x2 - x1) / pow((x2 - x1).length(), 2)) * (x2 - x1)
+
+    # ************************************************************************
+    # Angle free calculation, return V1 and V2
+    # ************************************************************************
+    @staticmethod
+    def angle_free_calculator(v1, v2, m1, m2, x1, x2):
+        v11 = Momentum.v1_vector_components_alternative(v1, v2, m1, m2, x1, x2)
+        v22 = Momentum.v2_vector_components_alternative(v1, v2, m1, m2, x1, x2)
+        return v11, v22
+
+    # ***************************************************************************************************
 
 if __name__ == '__main__':
     import doctest
@@ -234,21 +236,25 @@ if __name__ == '__main__':
     rect2.center = (200, 100)
     obj_2 = TestObject(x=-0.707, y=-0.707, mass=10.0, rect=rect2)
     c = Momentum(obj_1, obj_2)
+    print('Object 1 center : ', rect1.center)
+    print('Object 2 center : ', rect2.center)
     print('Testing method process : ', Momentum.process(obj_1, obj_2))
     v1, v2 = c.collision_calculator()
-    print(v1, v2)
+    print('Testing method collision_calculator : V1 ', v1, ' V2 ', v2)
 
     # ***************************************************************
     # Testing angle free representation v1 calculation
     # ***************************************************************
-    print('v1 : ', Momentum.v1_vector_components_alternative(pygame.math.Vector2(0.707, 0.707),
+    print('Object 1 center : ', pygame.math.Vector2(100, 0))
+    print('Object 2 center : ', pygame.math.Vector2(200, 0))
+    print('Angle free v1 : ', Momentum.v1_vector_components_alternative(pygame.math.Vector2(0.707, 0.707),
                                                     pygame.math.Vector2(-0.707, -0.707), 10.0, 10.0,
                                                     pygame.math.Vector2(100, 0), pygame.math.Vector2(200, 0)))
 
     # ***************************************************************
     # Angle free representation v2 calculation
     # ***************************************************************
-    print('v2 : ', Momentum.v2_vector_components_alternative(pygame.math.Vector2(0.707, 0.707),
+    print('Angle free v2 : ', Momentum.v2_vector_components_alternative(pygame.math.Vector2(0.707, 0.707),
                                                     pygame.math.Vector2(-0.707, -0.707), 10.0, 10.0,
                                                     pygame.math.Vector2(100, 0), pygame.math.Vector2(200, 0)))
 
@@ -258,11 +264,17 @@ if __name__ == '__main__':
     # Angle free method is much faster
     # Timing result  for 100000 iterations : 2.093596862793334
     # Angle free - timing result for 100000 iterations : 0.4719169265488081
-    v1 = pygame.math.Vector2(0.707, 0.707)
-    v2 = pygame.math.Vector2(-0.707, -0.707)
+    v1 = pygame.math.Vector2(0.707, 0)
+    v2 = pygame.math.Vector2(-0.707, 0)
     m1 = 10.0
     m2 = 10.0
     x1 = pygame.math.Vector2(100, 0)
     x2 = pygame.math.Vector2(200, 0)
+
+    print(Momentum.angle_free_calculator(v1, v2, m1, m2, x1, x2))
+
     print('Angle free - timing result for 100000 iterations :', Timer("Momentum.angle_free_calculator(v1, v2, m1, m2, x1, x2)",
                 "from __main__ import Momentum, v1, v2, m1, m2, x1, x2").timeit(100000))
+
+
+
