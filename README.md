@@ -7,7 +7,7 @@ Both technics have been tested and show exactly the same results.
 The following classes can be easily implemented into a 2D game (top down or horizontal/vertical scrolling) to generate
 a real time elastic collision engine.
 
-# * If you are using the trigonometry method, don't forget to inverse v1.y and v2.y before caluclation 
+* If you are using the trigonometry method, don't forget to inverse v1.y and v2.y before caluclation 
 e.g :
   v1 = pygame.math.Vector2(x1, y1).normalize()   # vector v1 (object1) prior collision 
   v2 = pygame.math.Vector2(x2, y2).normalize()   # vector v2 (object2) prior collision
@@ -17,9 +17,9 @@ e.g :
 
   m1, m2 = 10, 100  #  Object's mass 
   
-  # Rect1 is a pygame rectangle with the centre is the centre of the object1 
+  * Rect1 is a pygame rectangle with the centre is the centre of the object1 
   object1 = TestObject(v1.x, v1.y, m1, Rect1) 
-  # Rect2 is a pygame rectangle whom the centre is the cenre of the object2
+  * Rect2 is a pygame rectangle whom the centre is the cenre of the object2
   object2 = TestObject(v2.x, v2.y, m2, Rect2)
 
   v1_final = Momentum.process_v1(obj1, obj2)
@@ -28,8 +28,8 @@ e.g :
                         
 
 
-# - TRIGONOMETY : Timing result for 100000 iterations  : 2.093596862793334s
-# - ANGLE FREE  : Timing result for 100000 iterations  : 0.4719169265488081s
+* - TRIGONOMETY : Timing result for 100000 iterations  : 2.093596862793334s
+* - ANGLE FREE  : Timing result for 100000 iterations  : 0.4719169265488081s
 
 This code comes with a MIT license.
 
