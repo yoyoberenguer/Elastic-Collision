@@ -11,8 +11,11 @@ a real time elastic collision engine.
 e.g :
   
   -vector v1 (object1) prior collision 
+  
   v1 = pygame.math.Vector2(x1, y1).normalize()  
+  
   -vector v2 (object2) prior collision
+  
   v2 = pygame.math.Vector2(x2, y2).normalize()   
   
   v1.y *= -1
