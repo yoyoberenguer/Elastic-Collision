@@ -21,11 +21,11 @@ e.g :
 
   m1, m2 = 10, 100  #  Object's mass 
   
-  * Rect1 is a pygame rectangle with the centre is the centre of the object1 
+  * Rect1 is a pygame rectangle whom the centre is object1's centre
   
   object1 = TestObject(v1.x, v1.y, m1, Rect1) 
   
-  * Rect2 is a pygame rectangle whom the centre is the cenre of the object2
+  * Rect2 is a pygame rectangle whom the centre is object2's centre
   
   object2 = TestObject(v2.x, v2.y, m2, Rect2)
 
