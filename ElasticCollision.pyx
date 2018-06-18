@@ -31,17 +31,18 @@ __status__ = "Demo"
 
 import pygame
 import math
-from timeit import *
+
+# from timeit import *
 
 
 class TestObject:
     """ Create a test object for elastic collision engine"""
-    def __init__(self, x, y, mass, rect):
+    def __init__(self, x, y, mass, centre):
         self.vector = pygame.math.Vector2()
         self.vector.x = x
         self.vector.y = y
         self.mass = mass
-        self.rect = rect
+        self.centre = centre
 
 
 class Momentum:
@@ -121,8 +122,8 @@ class Momentum:
     def process(obj1, obj2):
         """ return scalar sizes for both objects.  """
 
-        phi = Momentum.contact_angle(pygame.math.Vector2(obj1.rect.center),
-                                     pygame.math.Vector2(obj2.rect.center))
+        phi = Momentum.contact_angle(pygame.math.Vector2(obj1.centre),
+                                     pygame.math.Vector2(obj2.centre))
 
         theta1 = Momentum.theta_angle(obj1.vector)
         theta2 = Momentum.theta_angle(obj2.vector)
@@ -140,8 +141,8 @@ class Momentum:
     # Same method than above but use objects defined with the TestObject class
     # ************************************************************************
     def collision_calculator(self):
-        phi = Momentum.contact_angle(pygame.math.Vector2(self.obj1.rect.center),
-                                     pygame.math.Vector2(self.obj2.rect.center))
+        phi = Momentum.contact_angle(pygame.math.Vector2(self.obj1.centre),
+                                     pygame.math.Vector2(self.obj2.centre))
 
         theta1 = Momentum.theta_angle(self.obj1.vector)
         theta2 = Momentum.theta_angle(self.obj2.vector)
@@ -159,8 +160,8 @@ class Momentum:
     @staticmethod
     def process_v1(obj1, obj2):
         """ return scalar size for object 1  """
-        phi = Momentum.contact_angle(pygame.math.Vector2(obj1.rect.center),
-                                     pygame.math.Vector2(obj2.rect.center))
+        phi = Momentum.contact_angle(pygame.math.Vector2(obj1.centre),
+                                     pygame.math.Vector2(obj2.centre))
 
         theta1 = Momentum.theta_angle(obj1.vector)
         theta2 = Momentum.theta_angle(obj2.vector)
@@ -174,8 +175,8 @@ class Momentum:
     @staticmethod
     def process_v2(obj1, obj2):
         """ return scalar size for object 2  """
-        phi = Momentum.contact_angle(pygame.math.Vector2(obj1.rect.center),
-                                     pygame.math.Vector2(obj2.rect.center))
+        phi = Momentum.contact_angle(pygame.math.Vector2(obj1.centre),
+                                     pygame.math.Vector2(obj2.centre))
 
         theta1 = Momentum.theta_angle(obj1.vector)
         theta2 = Momentum.theta_angle(obj2.vector)
@@ -226,18 +227,19 @@ class Momentum:
     # ***************************************************************************************************
 
 if __name__ == '__main__':
+    """
     import doctest
     doctest.testmod()
 
-    rect1 = pygame.Rect(10, 10, 50, 50)
-    rect1.center = (100, 200)
-    obj_1 = TestObject(x=0.707, y=0.707, mass=10.0, rect=rect1)
+
+    centre1 = (100, 200)
+    obj_1 = TestObject(x=0.707, y=0.707, mass=10.0, centre=centre1)
     rect2 = pygame.Rect(10, 10, 50, 50)
-    rect2.center = (200, 100)
-    obj_2 = TestObject(x=-0.707, y=-0.707, mass=10.0, rect=rect2)
+    centre2 = (200, 100)
+    obj_2 = TestObject(x=-0.707, y=-0.707, mass=10.0, centre=centre2)
     c = Momentum(obj_1, obj_2)
-    print('Object 1 center : ', rect1.center)
-    print('Object 2 center : ', rect2.center)
+    print('Object 1 center : ', centre1)
+    print('Object 2 center : ', centre2)
     print('Testing method process : ', Momentum.process(obj_1, obj_2))
     v1, v2 = c.collision_calculator()
     print('Testing method collision_calculator : V1 ', v1, ' V2 ', v2)
@@ -273,8 +275,9 @@ if __name__ == '__main__':
 
     print(Momentum.angle_free_calculator(v1, v2, m1, m2, x1, x2))
 
-    print('Angle free - timing result for 100000 iterations :', Timer("Momentum.angle_free_calculator(v1, v2, m1, m2, x1, x2)",
+    print('Angle free - timing result for 100000 iterations :', 
+                Timer("Momentum.angle_free_calculator(v1, v2, m1, m2, x1, x2)",
                 "from __main__ import Momentum, v1, v2, m1, m2, x1, x2").timeit(100000))
 
-
-
+    """
+    pass
