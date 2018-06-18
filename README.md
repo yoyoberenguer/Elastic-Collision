@@ -7,17 +7,16 @@ Both technics have been tested and show exactly the same results.
 The following classes can be easily implemented into a 2D game (top down or horizontal/vertical scrolling) to generate
 a real time elastic collision engine.
 
+![alt text](https://github.com/yoyoberenguer/2DElasticCollision/blob/master/2DCollisionEngine.png)
 
+Angle free example
 
-Angle free
+![alt text](https://github.com/yoyoberenguer/2DElasticCollision/blob/master/AngleFree.png)
 
+Trigonometry example
 
-Trigonometry 
-
-
-
-                        
-
+![alt text](https://github.com/yoyoberenguer/2DElasticCollision/blob/master/Trigonometry.png)
+                
 
 * - TRIGONOMETY : Timing result for 100000 iterations  : 2.093596862793334s
 * - ANGLE FREE  : Timing result for 100000 iterations  : 0.4719169265488081s
