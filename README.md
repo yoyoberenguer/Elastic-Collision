@@ -5,7 +5,7 @@ It contains two distinc methods (trigonometry and free angle representation).
 Both technics have been tested and show exactly the same results. 
 
 The following classes can be easily implemented into a 2D game (top down or horizontal/vertical scrolling) to generate
-a real time elastic collision engine or be used for educational purpose. 
+a real time elastic collision engine or used for educational purpose. 
 
 Download the the directory Assets and simulation.exe to see the demo (below picture)
 ![alt text](https://github.com/yoyoberenguer/2DElasticCollision/blob/master/2DCollisionEngine.png)
