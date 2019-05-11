@@ -11,7 +11,7 @@ import threading
 from ElasticCollision import Momentum as Physics
 from ElasticCollision import TestObject
 
-SIZE = (1024, 768)
+SIZE = (1024, 1024)
 UPPER = (SIZE[0], SIZE[1])
 LOWER = (0, 0)
 SIDE = 1  # 0.98
@@ -623,11 +623,19 @@ class Collision:
         # un-stick objects by adding momentum increments to objects
         while Rectangle.center_distance(obj1, obj2) <= 40:
                 # print(Rectangle.center_distance(obj1, obj2))
-                obj1.p1.x += min(v1.x, d_ * v1.normalize().x)
-                obj1.p1.y += min(v1.y, d_ * v1.normalize().y)
+                if v1.length() > 0:
+                    obj1.p1.x += min(v1.x, d_ * v1.normalize().x)
+                    obj1.p1.y += min(v1.y, d_ * v1.normalize().y)
+                else:
+                    obj1.p1.x += v1.x
+                    obj1.p1.y += v1.y
+                if v2.length() > 0:
+                    obj2.p1.x += min(v2.x, d_ * v2.normalize().x)
+                    obj2.p1.y += min(v2.y, d_ * v2.normalize().y)
+                else:
+                    obj2.p1.x += v2.x
+                    obj2.p1.y += v2.y
 
-                obj2.p1.x += min(v2.x, d_ * v2.normalize().x)
-                obj2.p1.y += min(v2.y, d_ * v2.normalize().y)
                 if N_ > 5:
                     break
                 N_ += 1
@@ -767,7 +775,7 @@ if __name__ == '__main__':
 
     BackGroundCollection = ['Assets\\Graphics\\ph-10046.jpg']
     pygame.display.set_caption("2D Collision detection engine")
-    GL.screen = pygame.display.set_mode((UPPER[0], UPPER[1]), HWSURFACE | DOUBLEBUF, 16)
+    GL.screen = pygame.display.set_mode((UPPER[0], UPPER[1]), 32)
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     GREEN = (106, 195, 61)
@@ -829,10 +837,15 @@ if __name__ == '__main__':
     pos1, pos2 = (0, 0), (0, 0)
     Vector = False
 
+    VideoBuffer = []
+    recording = False
+
     # -------- Main Program Loop -----------
     while not done:
         # --- Main event loop
         for event in pygame.event.get():  # User did something
+
+            keys = pygame.key.get_pressed()
 
             if event.type == pygame.QUIT:
                 done = True
@@ -848,6 +861,9 @@ if __name__ == '__main__':
 
             elif event.type == pygame.MOUSEMOTION:
                 pos2 = pygame.mouse.get_pos()
+
+            if keys[K_ESCAPE]:
+                done = True
 
         pressed_mouse = pygame.mouse.get_pressed()
 
@@ -889,10 +905,33 @@ if __name__ == '__main__':
         if N > UPPER[0]:
             N = -1000
 
+        if recording:
+            VideoBuffer.append(pygame.image.tostring(GL.screen, 'RGB', False))
+
         pygame.display.flip()
 
         # --- Limit to 60 frames per second
         clock.tick(60)
+
+    # Create a video
+    # convert all the image into a AVI file (with 60 fps)
+    print(GL.screen.get_size())
+    if recording:
+        import cv2
+        from cv2 import COLOR_RGBA2BGR
+        import numpy
+
+        video = cv2.VideoWriter('Video.avi',
+                                cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 45, (GL.screen.get_size()), True)
+
+        for image in VideoBuffer:
+
+            image = numpy.fromstring(image, numpy.uint8).reshape(*GL.screen.get_size(), 3)
+            image = cv2.cvtColor(image, COLOR_RGBA2BGR)
+            video.write(image)
+
+        cv2.destroyAllWindows()
+        video.release()
 
     pygame.quit()
 
