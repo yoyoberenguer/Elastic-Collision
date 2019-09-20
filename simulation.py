@@ -145,10 +145,6 @@ class Deformation(threading.Thread):
         self.cancel_deformation()
 
 
-def _isinstance(_obj, _type):
-        return isinstance(_obj, _type)
-
-
 class Momentum(object):
     """ Class momentum : Assign a momentum to a single vertex/point """
 
@@ -619,26 +615,26 @@ class Collision:
         """ Class method to un-stick objects after collision """
 
         d_ = obj1.p2.x + obj2.p2.x
-        N_ = 0
+        count = 0
         # un-stick objects by adding momentum increments to objects
         while Rectangle.center_distance(obj1, obj2) <= 40:
-                # print(Rectangle.center_distance(obj1, obj2))
-                if v1.length() > 0:
-                    obj1.p1.x += min(v1.x, d_ * v1.normalize().x)
-                    obj1.p1.y += min(v1.y, d_ * v1.normalize().y)
-                else:
-                    obj1.p1.x += v1.x
-                    obj1.p1.y += v1.y
-                if v2.length() > 0:
-                    obj2.p1.x += min(v2.x, d_ * v2.normalize().x)
-                    obj2.p1.y += min(v2.y, d_ * v2.normalize().y)
-                else:
-                    obj2.p1.x += v2.x
-                    obj2.p1.y += v2.y
+            # print(Rectangle.center_distance(obj1, obj2))
+            if v1.length() > 0:
+                obj1.p1.x += min(v1.x, d_ * v1.normalize().x)
+                obj1.p1.y += min(v1.y, d_ * v1.normalize().y)
+            else:
+                obj1.p1.x += v1.x
+                obj1.p1.y += v1.y
+            if v2.length() > 0:
+                obj2.p1.x += min(v2.x, d_ * v2.normalize().x)
+                obj2.p1.y += min(v2.y, d_ * v2.normalize().y)
+            else:
+                obj2.p1.x += v2.x
+                obj2.p1.y += v2.y
 
-                if N_ > 5:
-                    break
-                N_ += 1
+            if count > 5:
+                break
+            count += 1
 
     @staticmethod
     def explode(obj1):
@@ -674,9 +670,9 @@ class Collision:
 
         for r_ in range(particles):
             # particle with random mass
-            mass = uniform(0.1, 0.9)
+            obj_mass = uniform(0.1, 0.9)
 
-            rect = Rectangle(Vertex(x, y), Vertex(size, size), mass, str(len(BALL) + r_), 1, 1)
+            rect = Rectangle(Vertex(x, y), Vertex(size, size), obj_mass, str(len(BALL) + r_), 1, 1)
 
             # Add the particle to the drawable list
             BALL.append(rect)
@@ -695,15 +691,15 @@ class Collision:
             r_.p1.Momentum[1] = randint(-10, 10)
 
     @classmethod
-    def detect(cls, Engine):
+    def detect(cls, engine_):
 
         ind = 0
 
-        for Obj in Engine.objects:
+        for Obj in engine_.objects:
             self = Obj
             ind += 1
 
-            for obj in Engine.objects[ind:]:
+            for obj in engine_.objects[ind:]:
 
                 # objects are colliding
                 if self.intersection(obj):
@@ -723,11 +719,11 @@ class Collision:
                     mass2 = 2 * m1 / (m1 + m2)
                     if x1 == x2:
                         x1 += pygame.math.Vector2(0.1, 0.1)
-                    V11x, V11y = v1 - (mass1 * (v1 - v2).dot(x1 - x2) / pow((x1 - x2).length(), 2)) * (x1 - x2)
-                    V12x, V12y = v2 - (mass2 * (v2 - v1).dot(x2 - x1) / pow((x2 - x1).length(), 2)) * (x2 - x1)
+                    v11x, v11y = v1 - (mass1 * (v1 - v2).dot(x1 - x2) / pow((x1 - x2).length(), 2)) * (x1 - x2)
+                    v12x, v12y = v2 - (mass2 * (v2 - v1).dot(x2 - x1) / pow((x2 - x1).length(), 2)) * (x2 - x1)
 
-                    V11 = pygame.math.Vector2(V11x, V11y)
-                    V12 = pygame.math.Vector2(V12x, V12y)
+                    v11_angle_free = pygame.math.Vector2(v11x, v11y)
+                    v12_angle_free = pygame.math.Vector2(v12x, v12y)
 
                     # ------------
                     # Trigonometry
@@ -739,36 +735,42 @@ class Collision:
                     mass1, mass2 = self.mass, obj.mass
                     obj1 = TestObject(v1.x, v1.y, mass1, self.center())
                     obj2 = TestObject(v2.x, v2.y, mass2, obj.center())
-                    V1x, V1y = Physics.process_v1(obj1, obj2)
-                    V2x, V2y = Physics.process_v2(obj1, obj2)
-                    V1 = pygame.math.Vector2(V1x, V1y)
-                    V2 = pygame.math.Vector2(V2x, V2y)
+                    v1x, v1y = Physics.process_v1(obj1, obj2)
+                    v2x, v2y = Physics.process_v2(obj1, obj2)
+                    v1_trigo = pygame.math.Vector2(v1x, v1y)
+                    v2_trigo = pygame.math.Vector2(v2x, v2y)
+
+                    assert v11_angle_free == v1_trigo, \
+                        'Method discrepancy, angle free v11 = %s, v1_trigo = %s ' % (v11_angle_free, v1_trigo)
+                    assert v12_angle_free == v2_trigo, \
+                        'Method discrepancy, angle free v12 = %s, v2_trigo = %s ' % (v12_angle_free, v2_trigo)
 
                     # Add components x,y to vertex momentum
-                    self.p1.momentum[0] = V1x
-                    self.p1.momentum[1] = V1y
-                    obj.p1.momentum[0] = V2x
-                    obj.p1.momentum[1] = V2y
+                    self.p1.momentum[0] = v1x
+                    self.p1.momentum[1] = v1y
+                    obj.p1.momentum[0] = v2x
+                    obj.p1.momentum[1] = v2y
 
-                    self.p1.x += V1x
-                    self.p1.y += V1y
-                    obj.p1.x += V2x
-                    obj.p1.y += V2y
+                    self.p1.x += v1x
+                    self.p1.y += v1y
+                    obj.p1.x += v2x
+                    obj.p1.y += v2y
 
                     # still colliding?
                     if Rectangle.center_distance(self, obj) <= self.p1.x + obj.p2.x:
-                        Collision.un_stick(self, obj, V1, V2)
+                        Collision.un_stick(self, obj, v1_trigo, v2_trigo)
 
-                    # if self in Engine.objects:
-                    #    Deformation(self).start()
+                    """
+                    if self in engine_.objects:
+                        Deformation(self).start()
 
-                    # if obj in Engine.objects:
-                    #    Deformation(obj).start()
+                    if obj in engine_.objects:
+                        Deformation(obj).start()
+                    """
 
-
-class GL:
+class GL(object):
     def __init_(self):
-        screen = None
+        self.screen = None
 
 
 if __name__ == '__main__':
@@ -822,7 +824,7 @@ if __name__ == '__main__':
     pygame.mixer.pre_init(44100, 16, 2, 4095)
     pygame.init()
 
-    background = pygame.image.load(BackGroundCollection[0])
+    background = pygame.image.load(BackGroundCollection[0]).convert()
 
     Font = pygame.font.SysFont("arial", 10)
 
@@ -911,26 +913,25 @@ if __name__ == '__main__':
         pygame.display.flip()
 
         # --- Limit to 60 frames per second
-        clock.tick(60)
+        clock.tick(100)
 
     # Create a video
     # convert all the image into a AVI file (with 60 fps)
     print(GL.screen.get_size())
     if recording:
-        import cv2
-        from cv2 import COLOR_RGBA2BGR
+        from cv2 import COLOR_RGBA2BGR, VideoWriter, cvtColor, VideoWriter_fourcc, destroyAllWindows
         import numpy
 
-        video = cv2.VideoWriter('Video.avi',
-                                cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 45, (GL.screen.get_size()), True)
+        video = VideoWriter('Video.avi',
+                            VideoWriter_fourcc('M', 'J', 'P', 'G'), 45, (GL.screen.get_size()), True)
 
         for image in VideoBuffer:
 
             image = numpy.fromstring(image, numpy.uint8).reshape(*GL.screen.get_size(), 3)
-            image = cv2.cvtColor(image, COLOR_RGBA2BGR)
+            image = cvtColor(image, COLOR_RGBA2BGR)
             video.write(image)
 
-        cv2.destroyAllWindows()
+        destroyAllWindows()
         video.release()
 
     pygame.quit()
