@@ -175,11 +175,11 @@ obj2.mass = 10.0;
 // the cartesian domain.
 // Therefore as explained above, (Y) component of vectors have to be inversed 
 // in order to represent the objects collision correctly onto the screen.
-// After applying those changes to both vectors,  we can see that both objects will  
-// collide on screen. If you have drawn the object onto an A4 page, flip the page over,
-// draw the X-axis and Y-axis (cartesian system) and check that the 
-// vectors directions are now aline to the orignal vectors values before axis inversion. 
-// The result of vectors v12 and v21 should equal v1 and v2 (orignal velocity).
+// After applying those changes to both vectors,  we can see that both objects will not
+// collide. If you have drawn the object onto an A4 page, flip the page over,
+// draw the X-axis and Y-axis and check that the 
+// vectors directions are now aline to the orignal vectors values before the axis inversion. 
+// The result of vectors v12 and v21 should be equal to v1 and v2 (orignal velocity).
 // if v12 = v1 and v21 = v2 then we can say that both objects are not colliding.
 // v12(0.707, 0.707) & v21(-0.707, -0.707) 
 vec1 = momentum_t(obj1, obj2);
