@@ -79,9 +79,10 @@ c = Momentum(obj_1, obj_2)
 v12, v21 = c.collision_calculator()          
 ```
 # Python timings:
+```
 * - TRIGONOMETY : Timing result for 1000000 iterations  : 20.093596862793334s
 * - ANGLE FREE  : Timing result for 1000000 iterations  : 4.719169265488081s
-
+```
 # Elastic collision C implementation 
 ```
 This library contains two distinct methods to calculate the elastic collision 
