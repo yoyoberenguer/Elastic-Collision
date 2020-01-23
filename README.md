@@ -79,10 +79,10 @@ c = Momentum(obj_1, obj_2)
 v12, v21 = c.collision_calculator()          
 ```
 # Python timings:
-* - TRIGONOMETY : Timing result for 1000000 iterations  : 2.093596862793334s
-* - ANGLE FREE  : Timing result for 1000000 iterations  : 0.4719169265488081s
+* - TRIGONOMETY : Timing result for 1000000 iterations  : 20.093596862793334s
+* - ANGLE FREE  : Timing result for 1000000 iterations  : 4.719169265488081s
 
-# Elastic collision C implementation (Two dimensional with two moving objects) 
+# Elastic collision C implementation 
 ```
 This library contains two distinct methods to calculate the elastic collision 
 between two objects. 
@@ -96,9 +96,9 @@ between two objects.
 2) Angle free method 
  * In an angle-free representation, the changed velocities are computed using the 
    centers x1 and x2 at the time of contact as
-
-Considerations:
- 
+```
+## Considerations:
+ ```
  * When using these methods we are assuming that the objects will collide at some point 
    in time (and at least one object should be in motion). 
    A collision engine detection has to be implemented prior using these methods 
@@ -133,21 +133,24 @@ Considerations:
   * v21(x, y) become v21(x, y * -1) for object 2 final velocity
 
  SEE EXAMPLE section.
- 
-Requirement: 
+``` 
+## Requirement: 
+```
  This program use the library "vector.c" containing all the vector functions needed.
  Refer to the file vector.c to check vector functions and structures.
- 
-Observation: 
+```
+## Observation(s):
+```
  The angle free method gives a better result in terms of overall calculation speed. 
  See section timing for more details. 
-
-Timing:
+```
+## Timing:
+```
  Trigonometry 0.85 seconds for million calculations (850 ns/each)
  Angle free  0.17 seconds for million calculations (170 ns/each)
-
- EXAMPLE:
-
+```
+## EXAMPLE:
+```
 // -- TRIGONOMETRY METHOD
 
  * struct collider_object obj1, obj2;
@@ -202,8 +205,10 @@ printf("\nANGLE FREE - object2 vector : (x:%f y:%f) ", vec2.v21.x, vec2.v21.y);
 // Result : v12(0.707, 0.707) & v21(-0.707, -0.707) 
 // both methods are showing the exact same result after inversing y values of both
 // object's velocity vectors.
+```
 
-Recommandation: 
+## Recommandation: 
+```
  I recommand to use the angle free method over the trigonometric technic. 
  It is much faster and Y-axis inversion is not required.
 
