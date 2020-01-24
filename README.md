@@ -35,14 +35,14 @@ In an angle-free representation, the changed velocities are computed using the c
 where the angle brackets indicate the inner product (or dot product) of two vectors.
 
 # 2D Elastic Collision Engine
-
+```
 2D elastic collision engine implemented in python. 
 Two distinct methods (trigonometry and free angle representation). 
 Both methods have been tested and show exactly the same results. 
 
 The following classes can be easily implemented into a 2D game (top down or horizontal/vertical scrolling) to generate
 a real time elastic collision engine, or used for educational purpose. 
-
+```
 ## Python Angle free method 
 ```
 # define velocity vector for object 1 before contact
