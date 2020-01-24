@@ -154,7 +154,7 @@ between two objects.
 ```
 // -- TRIGONOMETRY METHOD
 
- * struct collider_object obj1, obj2;
+struct collider_object obj1, obj2;
 struct collision_vectors vec1;
 // 4 Lines below defines the velocity vector and 
 // objects's centre positions.
@@ -164,7 +164,7 @@ vecinit(&obj1.centre, 100.0, 200.0);
 vecinit(&obj2.centre, 200.0, 100.0);
 obj1.mass = 10.0;
 obj2.mass = 10.0;
- * 
+ 
 // If you represent the objects in a 2d cartesian coordinate system, 
 // you will realized that no collision will occur with the given 
 // direction vectors v1(0.707, 0.707) with centre C1(100, 200) 
@@ -180,7 +180,7 @@ obj2.mass = 10.0;
 // draw the X-axis and Y-axis and check that the 
 // vectors directions are now aline to the orignal vectors values before the axis inversion. 
 // The result of vectors v12 and v21 should be equal to v1 and v2 (orignal velocity).
-// if v12 = v1 and v21 = v2 then we can say that both objects are not colliding.
+// if v12 = v1 and v21 = v2 then we can say that both objects did not collide.
 // v12(0.707, 0.707) & v21(-0.707, -0.707) 
 vec1 = momentum_t(obj1, obj2);
 printf("\nTRIGONOMETRY - object1 vector : (x:%f y:%f) ", vec1.v12.x, vec1.v12.y);
@@ -190,7 +190,7 @@ printf("\nTRIGONOMETRY - object2 vector : (x:%f y:%f) ", vec1.v21.x, vec1.v21.y)
 // so we should get the same results for v12 and v21 (no collision)
  
 // -- ANGLE FREE METHOD 
- * 
+ 
 struct vector2d v1, v2, x1, x2;
 struct collision_vectors vec2;
 float m1, m2;
@@ -210,7 +210,7 @@ printf("\nANGLE FREE - object2 vector : (x:%f y:%f) ", vec2.v21.x, vec2.v21.y);
 
 ## Recommandation: 
 ```
- I recommand to use the angle free method over the trigonometric technic. 
+ I recommand to use the angle free method over the trigonometric Technic. 
  It is much faster and Y-axis inversion is not required.
 
 ```
