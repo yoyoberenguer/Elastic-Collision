@@ -40,8 +40,9 @@ where the angle brackets indicate the inner product (or dot product) of two vect
 Two distinct methods (trigonometry and free angle representation). 
 Both methods have been tested and show exactly the same results. 
 
-The following classes can be easily implemented into a 2D game (top down or horizontal/vertical scrolling) to generate
-a real time elastic collision engine, or used for educational purpose. 
+The following classes can be easily implemented into a 2D game (top down
+or horizontal/vertical scrolling) to generate a real time elastic 
+collision engine, or used for educational purpose. 
 ```
 ## Python Angle free method 
 ```
