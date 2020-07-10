@@ -34,3 +34,93 @@ In an angle-free representation, the changed velocities are computed using the c
 
 where the angle brackets indicate the inner product (or dot product) of two vectors.
 
+```
+FOLDER ElasticCollision_For_GAME: 
+This folder contains all the scripts design to works with 2D cartesian coordinate 
+system with Y-axis inverted (game application). 
+
+FOLDER Elastic_collision_REAL : 
+Contains all the cython/C scripts for REAL domain application.
+
+All cython scripts requires to be compiled before being imported into your favorite python IDE,
+please refer to the compilation section for more details.
+This library does not include a collision detection engine capable to determine object's 
+centre position at time of contact. As a result, all values used in the functions calls (method 
+free angle and trigonometric) are considered, initial values (velocity/position) of both objects prior 
+impact (velocity vector v1 & v2,  and object positions x1 , x2).
+
+In order to use both elastic collision algorithm you will have to provide a set of values such as:
+- Object's velocity and direction 
+- Object's positions (centre coordinate) 
+- Object's mass
+```
+
+## DESCRIPTION:
+```
+This library contains 2 distinct methods (trigonometry and free angle representation).
+Both techniques are using different approach:
+
+Angle free is by far the fastest method as it does not require trigonometric functions
+such as (cos, sin, atan … etc) in order to solve object's vector components at the time of contact.
+Angle free method rely on vector calculation instead (file vector.c for more details).
+
+Trigonometry method requires calculation of object's contact angle and angle theta at point of contact prior
+solving object's resultant vectors.
+```
+## COMPILATION :
+```
+BUILDING THE GAME VERSION
+In a command prompt and under the directory containing the source files
+e.g : 
+C:\ElasticCollision_For_GAME>python setup_ProjectC.py build_ext --inplace   -> Build Cython code (hooks to the C version)
+C:\ElasticCollision_For_GAME>python setup_Project.py build_ext --inplace    -> Build Cython code 
+
+BUIDLING THE REAL DOMAIN VERSION
+C:\ElasticCollision_REAL>python setup_ProjectC.py build_ext --inplace   -> Build Cython code (hooks to the C version)
+C:\ElasticCollision_REAL>python setup_Project.py build_ext --inplace    -> Build Cython code 
+
+*If the compilation fail, refers to the requirement section and make sure cython
+and a C-compiler are correctly install on your system.
+```
+## REQUIREMENTS :
+```
+- Pygame 3
+- Numpy
+- Cython (C extension for python)
+- A C compiler for windows (Visual Studio, MinGW etc) install on your system
+  and linked to your windows environment.
+  Note that some adjustment might be needed once a compiler is install on your system,
+  refer to external documentation or tutorial in order to setup this process.
+  e.g https://devblogs.microsoft.com/python/unable-to-find-vcvarsall-bat/
+```
+## HOW TO :
+```
+# Import elastic collision (Game version) library in your favorite python IDE 
+
+from EC_GAME import momentum_angle_free
+
+# Define Objects positions and velocity at time of contact.
+
+v1 = Vector2(0.707, 0.707)    # V1 is object1 direction/speed vector
+x1 = Vector2(0, 0)            # X1 is object1 centre coordinates tuple (x, y)
+v2 = Vector2(-0.707, -0.707)  # V2 is object2 direction/speed vector
+x2 = Vector2(1.4142, 1.4142)  # X2 is object2 centre coordinates tuple (x, y)
+m1 = 1.0                      # Object 1 mass
+m2 = 1.0                      # Object 2 mass
+
+invert = False                # Assume coordinate to be already inverted
+
+# RESULTS
+
+vec1, vec2 = momentum_angle_free(v1.x, v1.y, v2.x, v2.y, m1, m2, x1.x, x1.y, x2.x, x2.y, invert)
+print("\nANGLE FREE - object1 vector : (x:%s y:%s) ", (vec1['x'], vec1['y']))
+print("\nANGLE FREE - object2 vector : (x:%s y:%s) ", (vec2['x'], vec2['y']))
+```
+
+## TIMING:
+```
+For millions iterations
+ANGLE FREE      :  0.7796687 seconds
+TRIGONOMETRY    :  1.1638778 seconds
+```
+
