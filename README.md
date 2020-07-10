@@ -36,10 +36,12 @@ where the angle brackets indicate the inner product (or dot product) of two vect
 
 ```
 FOLDER ElasticCollision_For_GAME: 
+
 This folder contains all the scripts design to works with 2D cartesian coordinate 
 system with Y-axis inverted (game application). 
 
 FOLDER Elastic_collision_REAL : 
+
 Contains all the cython/C scripts for REAL domain application.
 
 All cython scripts requires to be compiled before being imported into your favorite python IDE,
