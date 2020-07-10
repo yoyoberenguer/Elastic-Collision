@@ -100,6 +100,7 @@ and a C-compiler are correctly install on your system.
 # Import elastic collision (Game version) library in your favorite python IDE 
 
 from EC_GAME import momentum_angle_free
+from pygame.math import Vector2
 
 # Define Objects positions and velocity at time of contact.
 
