@@ -96,7 +96,7 @@ and a C-compiler are correctly install on your system.
   e.g https://devblogs.microsoft.com/python/unable-to-find-vcvarsall-bat/
 ```
 ## HOW TO :
-```
+```python
 # Import elastic collision (Game version) library in your favorite python IDE 
 
 from EC_GAME import momentum_angle_free
@@ -118,6 +118,7 @@ invert = False                # Assume coordinate to be already inverted
 vec1, vec2 = momentum_angle_free(v1.x, v1.y, v2.x, v2.y, m1, m2, x1.x, x1.y, x2.x, x2.y, invert)
 print("\nANGLE FREE - object1 vector : (x:%s y:%s) ", (vec1['x'], vec1['y']))
 print("\nANGLE FREE - object2 vector : (x:%s y:%s) ", (vec2['x'], vec2['y']))
+
 ```
 
 ## TIMING:
