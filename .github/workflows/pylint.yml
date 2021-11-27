@@ -21,7 +21,7 @@ jobs:
         pip install numpy
         pip install Cython
         pip install pygame
-        pip install ElasticCollision
+        
     - name: Analysing the code with pylint
       run: |
         pylint $(find . -name "*.py" | xargs)
