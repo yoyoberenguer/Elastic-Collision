@@ -4,26 +4,22 @@
 {
     "distutils": {
         "depends": [
-            "ElasticCollision\\Source\\elastic_collision.c"
+            "..\\Source\\elastic_collision.c"
         ],
         "extra_compile_args": [
-            "/openmp",
             "/Qpar",
             "/fp:fast",
             "/O2",
             "/Oy",
             "/Ot"
         ],
-        "include_dirs": [
-            "ElasticCollision/game"
-        ],
         "language": "c",
-        "name": "ElasticCollision.c_game",
+        "name": "c_game",
         "sources": [
-            "ElasticCollision/game/c_game.pyx"
+            "c_game.pyx"
         ]
     },
-    "module_name": "ElasticCollision.c_game"
+    "module_name": "c_game"
 }
 END: Cython Metadata */
 
@@ -639,8 +635,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__ElasticCollision__c_game
-#define __PYX_HAVE_API__ElasticCollision__c_game
+#define __PYX_HAVE__c_game
+#define __PYX_HAVE_API__c_game
 /* Early includes */
 #include "../Source/elastic_collision.c"
 #ifdef _OPENMP
@@ -851,7 +847,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "ElasticCollision\\game\\c_game.pyx",
+  "c_game.pyx",
 };
 /* NoFastGil.proto */
 #define __Pyx_PyGILState_Ensure PyGILState_Ensure
@@ -867,29 +863,29 @@ static const char *__pyx_f[] = {
 
 
 /*--- Type declarations ---*/
-struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_angle_free_c;
-struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_trigonometry_c;
+struct __pyx_opt_args_6c_game_momentum_angle_free_c;
+struct __pyx_opt_args_6c_game_momentum_trigonometry_c;
 
-/* "ElasticCollision/game/c_game.pyx":100
+/* "c_game.pyx":100
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef tuple momentum_angle_free_c(             # <<<<<<<<<<<<<<
  *         v1_x: float, v1_y: float,
  *         v2_x: float, v2_y: float,
  */
-struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_angle_free_c {
+struct __pyx_opt_args_6c_game_momentum_angle_free_c {
   int __pyx_n;
   int invert;
 };
 
-/* "ElasticCollision/game/c_game.pyx":154
+/* "c_game.pyx":161
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef tuple momentum_trigonometry_c(             # <<<<<<<<<<<<<<
  *         v1x: float, v1y: float,
  *         m1: float,
  */
-struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_trigonometry_c {
+struct __pyx_opt_args_6c_game_momentum_trigonometry_c {
   int __pyx_n;
   int invert;
 };
@@ -1203,14 +1199,14 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'cython' */
 
-/* Module declarations from 'ElasticCollision.c_game' */
-static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double, double, double, double, double, double, double, double, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_angle_free_c *__pyx_optional_args); /*proto*/
-static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(double, double, double, double, double, double, double, double, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_trigonometry_c *__pyx_optional_args); /*proto*/
-#define __Pyx_MODULE_NAME "ElasticCollision.c_game"
-extern int __pyx_module_is_main_ElasticCollision__c_game;
-int __pyx_module_is_main_ElasticCollision__c_game = 0;
+/* Module declarations from 'c_game' */
+static PyObject *__pyx_f_6c_game_momentum_angle_free_c(double, double, double, double, double, double, double, double, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_6c_game_momentum_angle_free_c *__pyx_optional_args); /*proto*/
+static PyObject *__pyx_f_6c_game_momentum_trigonometry_c(double, double, double, double, double, double, double, double, double, double, int __pyx_skip_dispatch, struct __pyx_opt_args_6c_game_momentum_trigonometry_c *__pyx_optional_args); /*proto*/
+#define __Pyx_MODULE_NAME "c_game"
+extern int __pyx_module_is_main_c_game;
+int __pyx_module_is_main_c_game = 0;
 
-/* Implementation of 'ElasticCollision.c_game' */
+/* Implementation of 'c_game' */
 static PyObject *__pyx_builtin_FutureWarning;
 static PyObject *__pyx_builtin_RuntimeWarning;
 static PyObject *__pyx_builtin_ImportWarning;
@@ -1288,13 +1284,13 @@ static PyObject *__pyx_n_s_x2_x;
 static PyObject *__pyx_n_s_x2_y;
 static PyObject *__pyx_n_s_x2x;
 static PyObject *__pyx_n_s_x2y;
-static PyObject *__pyx_pf_16ElasticCollision_6c_game_momentum_angle_free_c(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_v1_x, double __pyx_v_v1_y, double __pyx_v_v2_x, double __pyx_v_v2_y, double __pyx_v_m1, double __pyx_v_m2, double __pyx_v_x1_x, double __pyx_v_x1_y, double __pyx_v_x2_x, double __pyx_v_x2_y, int __pyx_v_invert); /* proto */
-static PyObject *__pyx_pf_16ElasticCollision_6c_game_2momentum_trigonometry_c(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_v1x, double __pyx_v_v1y, double __pyx_v_m1, double __pyx_v_x1x, double __pyx_v_x1y, double __pyx_v_v2x, double __pyx_v_v2y, double __pyx_v_m2, double __pyx_v_x2x, double __pyx_v_x2y, int __pyx_v_invert); /* proto */
+static PyObject *__pyx_pf_6c_game_momentum_angle_free_c(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_v1_x, double __pyx_v_v1_y, double __pyx_v_v2_x, double __pyx_v_v2_y, double __pyx_v_m1, double __pyx_v_m2, double __pyx_v_x1_x, double __pyx_v_x1_y, double __pyx_v_x2_x, double __pyx_v_x2_y, int __pyx_v_invert); /* proto */
+static PyObject *__pyx_pf_6c_game_2momentum_trigonometry_c(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_v1x, double __pyx_v_v1y, double __pyx_v_m1, double __pyx_v_x1x, double __pyx_v_x1y, double __pyx_v_v2x, double __pyx_v_v2y, double __pyx_v_m2, double __pyx_v_x2x, double __pyx_v_x2y, int __pyx_v_invert); /* proto */
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
 /* Late includes */
 
-/* "ElasticCollision/game/c_game.pyx":100
+/* "c_game.pyx":100
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef tuple momentum_angle_free_c(             # <<<<<<<<<<<<<<
@@ -1302,10 +1298,10 @@ static PyObject *__pyx_tuple__2;
  *         v2_x: float, v2_y: float,
  */
 
-static PyObject *__pyx_pw_16ElasticCollision_6c_game_1momentum_angle_free_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double __pyx_v_v1_x, double __pyx_v_v1_y, double __pyx_v_v2_x, double __pyx_v_v2_y, double __pyx_v_m1, double __pyx_v_m2, double __pyx_v_x1_x, double __pyx_v_x1_y, double __pyx_v_x2_x, double __pyx_v_x2_y, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_angle_free_c *__pyx_optional_args) {
+static PyObject *__pyx_pw_6c_game_1momentum_angle_free_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_6c_game_momentum_angle_free_c(double __pyx_v_v1_x, double __pyx_v_v1_y, double __pyx_v_v2_x, double __pyx_v_v2_y, double __pyx_v_m1, double __pyx_v_m2, double __pyx_v_x1_x, double __pyx_v_x1_y, double __pyx_v_x2_x, double __pyx_v_x2_y, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_6c_game_momentum_angle_free_c *__pyx_optional_args) {
 
-  /* "ElasticCollision/game/c_game.pyx":106
+  /* "c_game.pyx":106
  *         x1_x: float, x1_y: float,
  *         x2_x: float, x2_y: float,
  *         invert:bint=False             # <<<<<<<<<<<<<<
@@ -1338,7 +1334,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
     }
   }
 
-  /* "ElasticCollision/game/c_game.pyx":136
+  /* "c_game.pyx":143
  *     """
  * 
  *     if invert:             # <<<<<<<<<<<<<<
@@ -1348,7 +1344,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   __pyx_t_1 = (__pyx_v_invert != 0);
   if (__pyx_t_1) {
 
-    /* "ElasticCollision/game/c_game.pyx":137
+    /* "c_game.pyx":144
  * 
  *     if invert:
  *         v1_y *=-<float>1.0             # <<<<<<<<<<<<<<
@@ -1357,7 +1353,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
  */
     __pyx_v_v1_y = (__pyx_v_v1_y * (-((float)1.0)));
 
-    /* "ElasticCollision/game/c_game.pyx":138
+    /* "c_game.pyx":145
  *     if invert:
  *         v1_y *=-<float>1.0
  *         v2_y *=-<float>1.0             # <<<<<<<<<<<<<<
@@ -1366,7 +1362,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
  */
     __pyx_v_v2_y = (__pyx_v_v2_y * (-((float)1.0)));
 
-    /* "ElasticCollision/game/c_game.pyx":139
+    /* "c_game.pyx":146
  *         v1_y *=-<float>1.0
  *         v2_y *=-<float>1.0
  *         x1_y *=-<float>1.0             # <<<<<<<<<<<<<<
@@ -1375,7 +1371,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
  */
     __pyx_v_x1_y = (__pyx_v_x1_y * (-((float)1.0)));
 
-    /* "ElasticCollision/game/c_game.pyx":140
+    /* "c_game.pyx":147
  *         v2_y *=-<float>1.0
  *         x1_y *=-<float>1.0
  *         x2_y *=-<float>1.0             # <<<<<<<<<<<<<<
@@ -1384,7 +1380,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
  */
     __pyx_v_x2_y = (__pyx_v_x2_y * (-((float)1.0)));
 
-    /* "ElasticCollision/game/c_game.pyx":136
+    /* "c_game.pyx":143
  *     """
  * 
  *     if invert:             # <<<<<<<<<<<<<<
@@ -1393,7 +1389,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
  */
   }
 
-  /* "ElasticCollision/game/c_game.pyx":143
+  /* "c_game.pyx":150
  *     cdef:
  *         collision_vectors v = \
  *             momentum_angle_free(v1_x, v1_y, v2_x, v2_y, m1, m2, x1_x, x1_y, x2_x, x2_y)             # <<<<<<<<<<<<<<
@@ -1402,7 +1398,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
  */
   __pyx_v_v = momentum_angle_free(__pyx_v_v1_x, __pyx_v_v1_y, __pyx_v_v2_x, __pyx_v_v2_y, __pyx_v_m1, __pyx_v_m2, __pyx_v_x1_x, __pyx_v_x1_y, __pyx_v_x2_x, __pyx_v_x2_y);
 
-  /* "ElasticCollision/game/c_game.pyx":144
+  /* "c_game.pyx":151
  *         collision_vectors v = \
  *             momentum_angle_free(v1_x, v1_y, v2_x, v2_y, m1, m2, x1_x, x1_y, x2_x, x2_y)
  *         vector2d vector1 = v.v12             # <<<<<<<<<<<<<<
@@ -1412,29 +1408,29 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   __pyx_t_2 = __pyx_v_v.v12;
   __pyx_v_vector1 = __pyx_t_2;
 
-  /* "ElasticCollision/game/c_game.pyx":145
+  /* "c_game.pyx":152
  *             momentum_angle_free(v1_x, v1_y, v2_x, v2_y, m1, m2, x1_x, x1_y, x2_x, x2_y)
  *         vector2d vector1 = v.v12
  *         vector2d vector2 = v.v21             # <<<<<<<<<<<<<<
  * 
- *     return Vector2(vector1.x, -vector1.y), Vector2(vector2.x, -vector2.y)
+ *     return Vector2(vector1.x, vector1.y), Vector2(vector2.x, vector2.y)
  */
   __pyx_t_2 = __pyx_v_v.v21;
   __pyx_v_vector2 = __pyx_t_2;
 
-  /* "ElasticCollision/game/c_game.pyx":147
+  /* "c_game.pyx":154
  *         vector2d vector2 = v.v21
  * 
- *     return Vector2(vector1.x, -vector1.y), Vector2(vector2.x, -vector2.y)             # <<<<<<<<<<<<<<
+ *     return Vector2(vector1.x, vector1.y), Vector2(vector2.x, vector2.y)             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Vector2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Vector2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_vector1.x); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_vector1.x); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyFloat_FromDouble((-__pyx_v_vector1.y)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_vector1.y); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_7 = NULL;
   __pyx_t_8 = 0;
@@ -1451,7 +1447,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_5, __pyx_t_6};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -1461,7 +1457,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_5, __pyx_t_6};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -1469,7 +1465,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   } else
   #endif
   {
-    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -1480,16 +1476,16 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
     PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, __pyx_t_6);
     __pyx_t_5 = 0;
     __pyx_t_6 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_9, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_9, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_Vector2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_Vector2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_vector2.x); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_vector2.x); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = PyFloat_FromDouble((-__pyx_v_vector2.y)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_vector2.y); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_7 = NULL;
   __pyx_t_8 = 0;
@@ -1506,7 +1502,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_9)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_6, __pyx_t_5};
-    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -1516,7 +1512,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_9)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_6, __pyx_t_5};
-    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -1524,7 +1520,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   } else
   #endif
   {
-    __pyx_t_10 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_10 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -1535,12 +1531,12 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
     PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_8, __pyx_t_5);
     __pyx_t_6 = 0;
     __pyx_t_5 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 154, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   }
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_3);
@@ -1552,7 +1548,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   __pyx_t_9 = 0;
   goto __pyx_L0;
 
-  /* "ElasticCollision/game/c_game.pyx":100
+  /* "c_game.pyx":100
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef tuple momentum_angle_free_c(             # <<<<<<<<<<<<<<
@@ -1569,7 +1565,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("ElasticCollision.c_game.momentum_angle_free_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("c_game.momentum_angle_free_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -1578,9 +1574,9 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(double
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_16ElasticCollision_6c_game_1momentum_angle_free_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_16ElasticCollision_6c_game_momentum_angle_free_c[] = "\n    RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (ANGLE FREE METHOD)\n    \n    This method is using angle free equations to determine the objects final velocities\n    Refer to Two-dimensional collision with two moving objects in the following link : \n    https://en.wikipedia.org/wiki/Elastic_collision \n    \n    * This method can be used to resolved 2d elastic collision in 2d space system (video game \n      space) where the Y-axis is inverted.  \n    \n    * v1_x & v1_y & v2_x, v2_y are un-normalized vectors (vector components) in order to \n      keep the total kinetic energy and to redistribute the force to the final velocities (v1 & v2) \n    \n    :param v1_x: float; object 1 velocity along the x-axis\n    :param v1_y: float; object 1 velocity along the y-axis\n    :param v2_x: float; object 2 velocity along the x-axis\n    :param v2_y: float; object 2 velocity along the y-axis\n    :param m1  : float; mass for object1 in kg\n    :param m2  : float; mass for object2 in kg\n    :param x1_x: float; object 1 centre position x coordinate\n    :param x1_y: float; object 1 centre position y coordinate\n    :param x2_x: float; object 2 centre position x coordinate\n    :param x2_y: float; object 2 centre position y coordinate\n    :param invert: Y-axis inversion | if True convert the model \n    to a cartesian coordinate system\n    :return: Return a tuple containing vectors v1 & v2 \n    ";
-static PyObject *__pyx_pw_16ElasticCollision_6c_game_1momentum_angle_free_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6c_game_1momentum_angle_free_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_6c_game_momentum_angle_free_c[] = "\n    RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (ANGLE FREE METHOD)\n    \n    This method is using angle free equations to determine the objects final velocities\n    Refer to Two-dimensional collision with two moving objects in the following link : \n    https://en.wikipedia.org/wiki/Elastic_collision \n    \n    * This method can be used to resolved 2d elastic collision in 2d space system (video game \n      space) where the Y-axis is inverted.  \n    \n    * v1_x & v1_y & v2_x, v2_y are un-normalized vectors (vector components) in order to \n      keep the total kinetic energy and to redistribute the force to the final velocities (v1 & v2) \n      \n    NOTE : \n    If you are working in a real domain system coordinate (cartesian system), prefer to use \n    the module:\n    - <real> for real domain application instead.\n    This method is essentially the same than momentum_trigonometry_real but it offers the possibility\n    to invert the final vectors trajectories\n    \n    :param v1_x: float; object 1 velocity along the x-axis\n    :param v1_y: float; object 1 velocity along the y-axis\n    :param v2_x: float; object 2 velocity along the x-axis\n    :param v2_y: float; object 2 velocity along the y-axis\n    :param m1  : float; mass for object1 in kg\n    :param m2  : float; mass for object2 in kg\n    :param x1_x: float; object 1 centre position x coordinate\n    :param x1_y: float; object 1 centre position y coordinate\n    :param x2_x: float; object 2 centre position x coordinate\n    :param x2_y: float; object 2 centre position y coordinate\n    :param invert: Y-axis inversion | if True convert the model \n    to a cartesian coordinate system\n    :return: Return a tuple containing vectors v1 & v2 \n    ";
+static PyObject *__pyx_pw_6c_game_1momentum_angle_free_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   double __pyx_v_v1_x;
   double __pyx_v_v1_y;
   double __pyx_v_v2_x;
@@ -1731,7 +1727,7 @@ static PyObject *__pyx_pw_16ElasticCollision_6c_game_1momentum_angle_free_c(PyOb
       __pyx_v_invert = __Pyx_PyObject_IsTrue(values[10]); if (unlikely((__pyx_v_invert == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 106, __pyx_L3_error)
     } else {
 
-      /* "ElasticCollision/game/c_game.pyx":106
+      /* "c_game.pyx":106
  *         x1_x: float, x1_y: float,
  *         x2_x: float, x2_y: float,
  *         invert:bint=False             # <<<<<<<<<<<<<<
@@ -1745,13 +1741,13 @@ static PyObject *__pyx_pw_16ElasticCollision_6c_game_1momentum_angle_free_c(PyOb
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("momentum_angle_free_c", 0, 10, 11, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 100, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("ElasticCollision.c_game.momentum_angle_free_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("c_game.momentum_angle_free_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_16ElasticCollision_6c_game_momentum_angle_free_c(__pyx_self, __pyx_v_v1_x, __pyx_v_v1_y, __pyx_v_v2_x, __pyx_v_v2_y, __pyx_v_m1, __pyx_v_m2, __pyx_v_x1_x, __pyx_v_x1_y, __pyx_v_x2_x, __pyx_v_x2_y, __pyx_v_invert);
+  __pyx_r = __pyx_pf_6c_game_momentum_angle_free_c(__pyx_self, __pyx_v_v1_x, __pyx_v_v1_y, __pyx_v_v2_x, __pyx_v_v2_y, __pyx_v_m1, __pyx_v_m2, __pyx_v_x1_x, __pyx_v_x1_y, __pyx_v_x2_x, __pyx_v_x2_y, __pyx_v_invert);
 
-  /* "ElasticCollision/game/c_game.pyx":100
+  /* "c_game.pyx":100
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef tuple momentum_angle_free_c(             # <<<<<<<<<<<<<<
@@ -1764,11 +1760,11 @@ static PyObject *__pyx_pw_16ElasticCollision_6c_game_1momentum_angle_free_c(PyOb
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_16ElasticCollision_6c_game_momentum_angle_free_c(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_v1_x, double __pyx_v_v1_y, double __pyx_v_v2_x, double __pyx_v_v2_y, double __pyx_v_m1, double __pyx_v_m2, double __pyx_v_x1_x, double __pyx_v_x1_y, double __pyx_v_x2_x, double __pyx_v_x2_y, int __pyx_v_invert) {
+static PyObject *__pyx_pf_6c_game_momentum_angle_free_c(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_v1_x, double __pyx_v_v1_y, double __pyx_v_v2_x, double __pyx_v_v2_y, double __pyx_v_m1, double __pyx_v_m2, double __pyx_v_x1_x, double __pyx_v_x1_y, double __pyx_v_x2_x, double __pyx_v_x2_y, int __pyx_v_invert) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_angle_free_c __pyx_t_2;
+  struct __pyx_opt_args_6c_game_momentum_angle_free_c __pyx_t_2;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1776,7 +1772,7 @@ static PyObject *__pyx_pf_16ElasticCollision_6c_game_momentum_angle_free_c(CYTHO
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.invert = __pyx_v_invert;
-  __pyx_t_1 = __pyx_f_16ElasticCollision_6c_game_momentum_angle_free_c(__pyx_v_v1_x, __pyx_v_v1_y, __pyx_v_v2_x, __pyx_v_v2_y, __pyx_v_m1, __pyx_v_m2, __pyx_v_x1_x, __pyx_v_x1_y, __pyx_v_x2_x, __pyx_v_x2_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6c_game_momentum_angle_free_c(__pyx_v_v1_x, __pyx_v_v1_y, __pyx_v_v2_x, __pyx_v_v2_y, __pyx_v_m1, __pyx_v_m2, __pyx_v_x1_x, __pyx_v_x1_y, __pyx_v_x2_x, __pyx_v_x2_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1785,7 +1781,7 @@ static PyObject *__pyx_pf_16ElasticCollision_6c_game_momentum_angle_free_c(CYTHO
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("ElasticCollision.c_game.momentum_angle_free_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("c_game.momentum_angle_free_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -1793,7 +1789,7 @@ static PyObject *__pyx_pf_16ElasticCollision_6c_game_momentum_angle_free_c(CYTHO
   return __pyx_r;
 }
 
-/* "ElasticCollision/game/c_game.pyx":154
+/* "c_game.pyx":161
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef tuple momentum_trigonometry_c(             # <<<<<<<<<<<<<<
@@ -1801,10 +1797,10 @@ static PyObject *__pyx_pf_16ElasticCollision_6c_game_momentum_angle_free_c(CYTHO
  *         m1: float,
  */
 
-static PyObject *__pyx_pw_16ElasticCollision_6c_game_3momentum_trigonometry_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(double __pyx_v_v1x, double __pyx_v_v1y, double __pyx_v_m1, double __pyx_v_x1x, double __pyx_v_x1y, double __pyx_v_v2x, double __pyx_v_v2y, double __pyx_v_m2, double __pyx_v_x2x, double __pyx_v_x2y, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_trigonometry_c *__pyx_optional_args) {
+static PyObject *__pyx_pw_6c_game_3momentum_trigonometry_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_6c_game_momentum_trigonometry_c(double __pyx_v_v1x, double __pyx_v_v1y, double __pyx_v_m1, double __pyx_v_x1x, double __pyx_v_x1y, double __pyx_v_v2x, double __pyx_v_v2y, double __pyx_v_m2, double __pyx_v_x2x, double __pyx_v_x2y, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_6c_game_momentum_trigonometry_c *__pyx_optional_args) {
 
-  /* "ElasticCollision/game/c_game.pyx":161
+  /* "c_game.pyx":168
  *         m2 : float,
  *         x2x: float, x2y : float,
  *         invert: bint=False             # <<<<<<<<<<<<<<
@@ -1843,7 +1839,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
     }
   }
 
-  /* "ElasticCollision/game/c_game.pyx":201
+  /* "c_game.pyx":210
  *         vector2d v1, v2, x1, x2
  * 
  *     if invert:             # <<<<<<<<<<<<<<
@@ -1853,7 +1849,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   __pyx_t_1 = (__pyx_v_invert != 0);
   if (__pyx_t_1) {
 
-    /* "ElasticCollision/game/c_game.pyx":202
+    /* "c_game.pyx":211
  * 
  *     if invert:
  *         v1y *= -<float> 1.0             # <<<<<<<<<<<<<<
@@ -1862,7 +1858,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
     __pyx_v_v1y = (__pyx_v_v1y * (-((float)1.0)));
 
-    /* "ElasticCollision/game/c_game.pyx":203
+    /* "c_game.pyx":212
  *     if invert:
  *         v1y *= -<float> 1.0
  *         v2y *= -<float> 1.0             # <<<<<<<<<<<<<<
@@ -1871,7 +1867,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
     __pyx_v_v2y = (__pyx_v_v2y * (-((float)1.0)));
 
-    /* "ElasticCollision/game/c_game.pyx":204
+    /* "c_game.pyx":213
  *         v1y *= -<float> 1.0
  *         v2y *= -<float> 1.0
  *         x1y *= -<float> 1.0             # <<<<<<<<<<<<<<
@@ -1880,7 +1876,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
     __pyx_v_x1y = (__pyx_v_x1y * (-((float)1.0)));
 
-    /* "ElasticCollision/game/c_game.pyx":205
+    /* "c_game.pyx":214
  *         v2y *= -<float> 1.0
  *         x1y *= -<float> 1.0
  *         x2y *= -<float> 1.0             # <<<<<<<<<<<<<<
@@ -1889,7 +1885,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
     __pyx_v_x2y = (__pyx_v_x2y * (-((float)1.0)));
 
-    /* "ElasticCollision/game/c_game.pyx":201
+    /* "c_game.pyx":210
  *         vector2d v1, v2, x1, x2
  * 
  *     if invert:             # <<<<<<<<<<<<<<
@@ -1898,7 +1894,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
   }
 
-  /* "ElasticCollision/game/c_game.pyx":207
+  /* "c_game.pyx":216
  *         x2y *= -<float> 1.0
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -1913,7 +1909,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
       #endif
       /*try:*/ {
 
-        /* "ElasticCollision/game/c_game.pyx":208
+        /* "c_game.pyx":217
  * 
  *     with nogil:
  *         vecinit(&v1, v1x, v1y)             # <<<<<<<<<<<<<<
@@ -1922,7 +1918,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
         vecinit((&__pyx_v_v1), __pyx_v_v1x, __pyx_v_v1y);
 
-        /* "ElasticCollision/game/c_game.pyx":209
+        /* "c_game.pyx":218
  *     with nogil:
  *         vecinit(&v1, v1x, v1y)
  *         vecinit(&v2, v2x, v2y)             # <<<<<<<<<<<<<<
@@ -1931,7 +1927,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
         vecinit((&__pyx_v_v2), __pyx_v_v2x, __pyx_v_v2y);
 
-        /* "ElasticCollision/game/c_game.pyx":210
+        /* "c_game.pyx":219
  *         vecinit(&v1, v1x, v1y)
  *         vecinit(&v2, v2x, v2y)
  *         vecinit(&x1, x1x, x1y)             # <<<<<<<<<<<<<<
@@ -1940,7 +1936,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
         vecinit((&__pyx_v_x1), __pyx_v_x1x, __pyx_v_x1y);
 
-        /* "ElasticCollision/game/c_game.pyx":211
+        /* "c_game.pyx":220
  *         vecinit(&v2, v2x, v2y)
  *         vecinit(&x1, x1x, x1y)
  *         vecinit(&x2, x2x, x2y)             # <<<<<<<<<<<<<<
@@ -1949,7 +1945,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
         vecinit((&__pyx_v_x2), __pyx_v_x2x, __pyx_v_x2y);
 
-        /* "ElasticCollision/game/c_game.pyx":213
+        /* "c_game.pyx":222
  *         vecinit(&x2, x2x, x2y)
  * 
  *         obj1_c.vector = v1             # <<<<<<<<<<<<<<
@@ -1958,7 +1954,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
         __pyx_v_obj1_c.vector = __pyx_v_v1;
 
-        /* "ElasticCollision/game/c_game.pyx":214
+        /* "c_game.pyx":223
  * 
  *         obj1_c.vector = v1
  *         obj1_c.mass   = m1             # <<<<<<<<<<<<<<
@@ -1967,7 +1963,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
         __pyx_v_obj1_c.mass = __pyx_v_m1;
 
-        /* "ElasticCollision/game/c_game.pyx":215
+        /* "c_game.pyx":224
  *         obj1_c.vector = v1
  *         obj1_c.mass   = m1
  *         obj1_c.centre = x1             # <<<<<<<<<<<<<<
@@ -1976,7 +1972,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
         __pyx_v_obj1_c.centre = __pyx_v_x1;
 
-        /* "ElasticCollision/game/c_game.pyx":217
+        /* "c_game.pyx":226
  *         obj1_c.centre = x1
  * 
  *         obj2_c.vector = v2             # <<<<<<<<<<<<<<
@@ -1985,7 +1981,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
         __pyx_v_obj2_c.vector = __pyx_v_v2;
 
-        /* "ElasticCollision/game/c_game.pyx":218
+        /* "c_game.pyx":227
  * 
  *         obj2_c.vector = v2
  *         obj2_c.mass   = m2             # <<<<<<<<<<<<<<
@@ -1994,7 +1990,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
         __pyx_v_obj2_c.mass = __pyx_v_m2;
 
-        /* "ElasticCollision/game/c_game.pyx":219
+        /* "c_game.pyx":228
  *         obj2_c.vector = v2
  *         obj2_c.mass   = m2
  *         obj2_c.centre = x2             # <<<<<<<<<<<<<<
@@ -2004,7 +2000,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
         __pyx_v_obj2_c.centre = __pyx_v_x2;
       }
 
-      /* "ElasticCollision/game/c_game.pyx":207
+      /* "c_game.pyx":216
  *         x2y *= -<float> 1.0
  * 
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -2023,7 +2019,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
       }
   }
 
-  /* "ElasticCollision/game/c_game.pyx":222
+  /* "c_game.pyx":231
  * 
  *     cdef:
  *         collision_vectors obj_c = momentum_t(obj1_c, obj2_c)             # <<<<<<<<<<<<<<
@@ -2032,7 +2028,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
  */
   __pyx_v_obj_c = momentum_t(__pyx_v_obj1_c, __pyx_v_obj2_c);
 
-  /* "ElasticCollision/game/c_game.pyx":223
+  /* "c_game.pyx":232
  *     cdef:
  *         collision_vectors obj_c = momentum_t(obj1_c, obj2_c)
  *         vector2d vector1 = obj_c.v12             # <<<<<<<<<<<<<<
@@ -2042,29 +2038,29 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   __pyx_t_2 = __pyx_v_obj_c.v12;
   __pyx_v_vector1 = __pyx_t_2;
 
-  /* "ElasticCollision/game/c_game.pyx":224
+  /* "c_game.pyx":233
  *         collision_vectors obj_c = momentum_t(obj1_c, obj2_c)
  *         vector2d vector1 = obj_c.v12
  *         vector2d vector2 = obj_c.v21             # <<<<<<<<<<<<<<
  * 
- *     return Vector2(vector1.x, -vector1.y), Vector2(vector2.x, -vector2.y)
+ *     return Vector2(vector1.x, vector1.y), Vector2(vector2.x, vector2.y)
  */
   __pyx_t_2 = __pyx_v_obj_c.v21;
   __pyx_v_vector2 = __pyx_t_2;
 
-  /* "ElasticCollision/game/c_game.pyx":226
+  /* "c_game.pyx":235
  *         vector2d vector2 = obj_c.v21
  * 
- *     return Vector2(vector1.x, -vector1.y), Vector2(vector2.x, -vector2.y)             # <<<<<<<<<<<<<<
+ *     return Vector2(vector1.x, vector1.y), Vector2(vector2.x, vector2.y)             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Vector2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_Vector2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_vector1.x); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_vector1.x); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = PyFloat_FromDouble((-__pyx_v_vector1.y)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_vector1.y); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_7 = NULL;
   __pyx_t_8 = 0;
@@ -2081,7 +2077,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_5, __pyx_t_6};
-    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2091,7 +2087,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_5, __pyx_t_6};
-    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2099,7 +2095,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   } else
   #endif
   {
-    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -2110,16 +2106,16 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
     PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, __pyx_t_6);
     __pyx_t_5 = 0;
     __pyx_t_6 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_9, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_9, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_Vector2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_9, __pyx_n_s_Vector2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_vector2.x); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_vector2.x); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_5 = PyFloat_FromDouble((-__pyx_v_vector2.y)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_vector2.y); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_7 = NULL;
   __pyx_t_8 = 0;
@@ -2136,7 +2132,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_9)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_6, __pyx_t_5};
-    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -2146,7 +2142,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_9)) {
     PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_6, __pyx_t_5};
-    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_9, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -2154,7 +2150,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   } else
   #endif
   {
-    __pyx_t_10 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_10 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     if (__pyx_t_7) {
       __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_7); __pyx_t_7 = NULL;
@@ -2165,12 +2161,12 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
     PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_8, __pyx_t_5);
     __pyx_t_6 = 0;
     __pyx_t_5 = 0;
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 226, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   }
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_3);
@@ -2182,7 +2178,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   __pyx_t_9 = 0;
   goto __pyx_L0;
 
-  /* "ElasticCollision/game/c_game.pyx":154
+  /* "c_game.pyx":161
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef tuple momentum_trigonometry_c(             # <<<<<<<<<<<<<<
@@ -2199,7 +2195,7 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_9);
   __Pyx_XDECREF(__pyx_t_10);
-  __Pyx_AddTraceback("ElasticCollision.c_game.momentum_trigonometry_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("c_game.momentum_trigonometry_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2208,9 +2204,9 @@ static PyObject *__pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(doub
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_16ElasticCollision_6c_game_3momentum_trigonometry_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_16ElasticCollision_6c_game_2momentum_trigonometry_c[] = "\n    RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (TRIGONOMETRY) \n    \n    This method is using trigonometric equations to determine the objects final velocities\n    Refer to Two-dimensional collision with two moving objects in the following link : \n    https://en.wikipedia.org/wiki/Elastic_collision \n    \n    * This method can be used to resolved 2d elastic collision in 2d space system (video game \n      space) where the Y-axis is inverted.  \n    \n    * v1_x & v1_y & v2_x, v2_y are un-normalized vectors (vector components) in order to \n      keep the total kinetic energy and to redistribute the force to the final velocities (v1 & v2) \n    \n    * By default invert is false as this library is design to work for 2d elastic collision \n      in a game space system coordinate where y axis is always inverted, and all input data \n      should already satisfy this requirement. Therefore if this is not the case, you can set\n       the variable invert to true. \n    \n    :param v1x : float, object 1 velocity along the x-axis\n    :param v1y : float, object 1 velocity along the y-axis\n    :param m1  : float, mass for object1 in kg\n    :param x1x : float, object 1 centre position x coordinate\n    :param x1y : float, object 1 centre position y coordinate\n    :param v2x : float, object 2 velocity along the x-axis\n    :param v2y : float, object 2 velocity along the y-axis\n    :param m2  : float, mass for object2 in kg\n    :param x2x : float, object 2 centre position x coordinate\n    :param x2y : float, object 2 centre position y coordinate\n    :param invert: bool Y-axis inversion | if True convert the model \n    to a cartesian coordinate system\n    :return: Return a tuple containing vectors v1 & v2\n    ";
-static PyObject *__pyx_pw_16ElasticCollision_6c_game_3momentum_trigonometry_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_6c_game_3momentum_trigonometry_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_6c_game_2momentum_trigonometry_c[] = "\n    RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (TRIGONOMETRY) \n    \n    This method is using trigonometric equations to determine the objects final velocities\n    Refer to Two-dimensional collision with two moving objects in the following link : \n    https://en.wikipedia.org/wiki/Elastic_collision \n    \n    * This method can be used to resolved 2d elastic collision in 2d space system (video game \n      space) where the Y-axis is inverted.  \n    \n    * v1_x & v1_y & v2_x, v2_y are un-normalized vectors (vector components) in order to \n      keep the total kinetic energy and to redistribute the force to the final velocities (v1 & v2) \n    \n    NOTE : \n    If you are working in a real domain system coordinate (cartesian system), prefer to use \n    the module:\n    - <real> for real domain application instead.\n    This method is essentially the same than momentum_trigonometry_real but it offers the possibility\n    to invert the final vectors trajectories\n    \n    :param v1x : float, object 1 velocity along the x-axis\n    :param v1y : float, object 1 velocity along the y-axis\n    :param m1  : float, mass for object1 in kg\n    :param x1x : float, object 1 centre position x coordinate\n    :param x1y : float, object 1 centre position y coordinate\n    :param v2x : float, object 2 velocity along the x-axis\n    :param v2y : float, object 2 velocity along the y-axis\n    :param m2  : float, mass for object2 in kg\n    :param x2x : float, object 2 centre position x coordinate\n    :param x2y : float, object 2 centre position y coordinate\n    :param invert: bool Y-axis inversion | if True convert the model \n    to a cartesian coordinate system\n    :return: Return a tuple containing vectors v1 & v2\n    ";
+static PyObject *__pyx_pw_6c_game_3momentum_trigonometry_c(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   double __pyx_v_v1x;
   double __pyx_v_v1y;
   double __pyx_v_m1;
@@ -2269,55 +2265,55 @@ static PyObject *__pyx_pw_16ElasticCollision_6c_game_3momentum_trigonometry_c(Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v1y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 1); __PYX_ERR(0, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 1); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_m1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 2); __PYX_ERR(0, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 2); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x1x)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 3); __PYX_ERR(0, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 3); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x1y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 4); __PYX_ERR(0, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 4); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v2x)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 5); __PYX_ERR(0, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 5); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (likely((values[6] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_v2y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 6); __PYX_ERR(0, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 6); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  7:
         if (likely((values[7] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_m2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 7); __PYX_ERR(0, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 7); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  8:
         if (likely((values[8] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x2x)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 8); __PYX_ERR(0, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 8); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  9:
         if (likely((values[9] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x2y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 9); __PYX_ERR(0, 154, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, 9); __PYX_ERR(0, 161, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case 10:
@@ -2327,7 +2323,7 @@ static PyObject *__pyx_pw_16ElasticCollision_6c_game_3momentum_trigonometry_c(Py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "momentum_trigonometry_c") < 0)) __PYX_ERR(0, 154, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "momentum_trigonometry_c") < 0)) __PYX_ERR(0, 161, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2347,21 +2343,21 @@ static PyObject *__pyx_pw_16ElasticCollision_6c_game_3momentum_trigonometry_c(Py
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_v1x = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_v1x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 155, __pyx_L3_error)
-    __pyx_v_v1y = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_v1y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 155, __pyx_L3_error)
-    __pyx_v_m1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_m1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 156, __pyx_L3_error)
-    __pyx_v_x1x = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_x1x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 157, __pyx_L3_error)
-    __pyx_v_x1y = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_x1y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 157, __pyx_L3_error)
-    __pyx_v_v2x = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_v2x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 158, __pyx_L3_error)
-    __pyx_v_v2y = __pyx_PyFloat_AsDouble(values[6]); if (unlikely((__pyx_v_v2y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 158, __pyx_L3_error)
-    __pyx_v_m2 = __pyx_PyFloat_AsDouble(values[7]); if (unlikely((__pyx_v_m2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L3_error)
-    __pyx_v_x2x = __pyx_PyFloat_AsDouble(values[8]); if (unlikely((__pyx_v_x2x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L3_error)
-    __pyx_v_x2y = __pyx_PyFloat_AsDouble(values[9]); if (unlikely((__pyx_v_x2y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L3_error)
+    __pyx_v_v1x = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_v1x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
+    __pyx_v_v1y = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_v1y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L3_error)
+    __pyx_v_m1 = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_m1 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L3_error)
+    __pyx_v_x1x = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_x1x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 164, __pyx_L3_error)
+    __pyx_v_x1y = __pyx_PyFloat_AsDouble(values[4]); if (unlikely((__pyx_v_x1y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 164, __pyx_L3_error)
+    __pyx_v_v2x = __pyx_PyFloat_AsDouble(values[5]); if (unlikely((__pyx_v_v2x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L3_error)
+    __pyx_v_v2y = __pyx_PyFloat_AsDouble(values[6]); if (unlikely((__pyx_v_v2y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L3_error)
+    __pyx_v_m2 = __pyx_PyFloat_AsDouble(values[7]); if (unlikely((__pyx_v_m2 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L3_error)
+    __pyx_v_x2x = __pyx_PyFloat_AsDouble(values[8]); if (unlikely((__pyx_v_x2x == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 167, __pyx_L3_error)
+    __pyx_v_x2y = __pyx_PyFloat_AsDouble(values[9]); if (unlikely((__pyx_v_x2y == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 167, __pyx_L3_error)
     if (values[10]) {
-      __pyx_v_invert = __Pyx_PyObject_IsTrue(values[10]); if (unlikely((__pyx_v_invert == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L3_error)
+      __pyx_v_invert = __Pyx_PyObject_IsTrue(values[10]); if (unlikely((__pyx_v_invert == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 168, __pyx_L3_error)
     } else {
 
-      /* "ElasticCollision/game/c_game.pyx":161
+      /* "c_game.pyx":168
  *         m2 : float,
  *         x2x: float, x2y : float,
  *         invert: bint=False             # <<<<<<<<<<<<<<
@@ -2373,15 +2369,15 @@ static PyObject *__pyx_pw_16ElasticCollision_6c_game_3momentum_trigonometry_c(Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 154, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("momentum_trigonometry_c", 0, 10, 11, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 161, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("ElasticCollision.c_game.momentum_trigonometry_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("c_game.momentum_trigonometry_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_16ElasticCollision_6c_game_2momentum_trigonometry_c(__pyx_self, __pyx_v_v1x, __pyx_v_v1y, __pyx_v_m1, __pyx_v_x1x, __pyx_v_x1y, __pyx_v_v2x, __pyx_v_v2y, __pyx_v_m2, __pyx_v_x2x, __pyx_v_x2y, __pyx_v_invert);
+  __pyx_r = __pyx_pf_6c_game_2momentum_trigonometry_c(__pyx_self, __pyx_v_v1x, __pyx_v_v1y, __pyx_v_m1, __pyx_v_x1x, __pyx_v_x1y, __pyx_v_v2x, __pyx_v_v2y, __pyx_v_m2, __pyx_v_x2x, __pyx_v_x2y, __pyx_v_invert);
 
-  /* "ElasticCollision/game/c_game.pyx":154
+  /* "c_game.pyx":161
  * @cython.nonecheck(False)
  * @cython.cdivision(True)
  * cpdef tuple momentum_trigonometry_c(             # <<<<<<<<<<<<<<
@@ -2394,11 +2390,11 @@ static PyObject *__pyx_pw_16ElasticCollision_6c_game_3momentum_trigonometry_c(Py
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_16ElasticCollision_6c_game_2momentum_trigonometry_c(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_v1x, double __pyx_v_v1y, double __pyx_v_m1, double __pyx_v_x1x, double __pyx_v_x1y, double __pyx_v_v2x, double __pyx_v_v2y, double __pyx_v_m2, double __pyx_v_x2x, double __pyx_v_x2y, int __pyx_v_invert) {
+static PyObject *__pyx_pf_6c_game_2momentum_trigonometry_c(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_v1x, double __pyx_v_v1y, double __pyx_v_m1, double __pyx_v_x1x, double __pyx_v_x1y, double __pyx_v_v2x, double __pyx_v_v2y, double __pyx_v_m2, double __pyx_v_x2x, double __pyx_v_x2y, int __pyx_v_invert) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  struct __pyx_opt_args_16ElasticCollision_6c_game_momentum_trigonometry_c __pyx_t_2;
+  struct __pyx_opt_args_6c_game_momentum_trigonometry_c __pyx_t_2;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2406,7 +2402,7 @@ static PyObject *__pyx_pf_16ElasticCollision_6c_game_2momentum_trigonometry_c(CY
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.invert = __pyx_v_invert;
-  __pyx_t_1 = __pyx_f_16ElasticCollision_6c_game_momentum_trigonometry_c(__pyx_v_v1x, __pyx_v_v1y, __pyx_v_m1, __pyx_v_x1x, __pyx_v_x1y, __pyx_v_v2x, __pyx_v_v2y, __pyx_v_m2, __pyx_v_x2x, __pyx_v_x2y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_6c_game_momentum_trigonometry_c(__pyx_v_v1x, __pyx_v_v1y, __pyx_v_m1, __pyx_v_x1x, __pyx_v_x1y, __pyx_v_v2x, __pyx_v_v2y, __pyx_v_m2, __pyx_v_x2x, __pyx_v_x2y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2415,7 +2411,7 @@ static PyObject *__pyx_pf_16ElasticCollision_6c_game_2momentum_trigonometry_c(CY
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("ElasticCollision.c_game.momentum_trigonometry_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("c_game.momentum_trigonometry_c", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2424,8 +2420,8 @@ static PyObject *__pyx_pf_16ElasticCollision_6c_game_2momentum_trigonometry_c(CY
 }
 
 static PyMethodDef __pyx_methods[] = {
-  {"momentum_angle_free_c", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_16ElasticCollision_6c_game_1momentum_angle_free_c, METH_VARARGS|METH_KEYWORDS, __pyx_doc_16ElasticCollision_6c_game_momentum_angle_free_c},
-  {"momentum_trigonometry_c", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_16ElasticCollision_6c_game_3momentum_trigonometry_c, METH_VARARGS|METH_KEYWORDS, __pyx_doc_16ElasticCollision_6c_game_2momentum_trigonometry_c},
+  {"momentum_angle_free_c", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6c_game_1momentum_angle_free_c, METH_VARARGS|METH_KEYWORDS, __pyx_doc_6c_game_momentum_angle_free_c},
+  {"momentum_trigonometry_c", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_6c_game_3momentum_trigonometry_c, METH_VARARGS|METH_KEYWORDS, __pyx_doc_6c_game_2momentum_trigonometry_c},
   {0, 0, 0, 0}
 };
 
@@ -2523,7 +2519,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "ElasticCollision/game/c_game.pyx":36
+  /* "c_game.pyx":36
  * 
  * import warnings
  * warnings.filterwarnings("ignore", category=FutureWarning)             # <<<<<<<<<<<<<<
@@ -2534,7 +2530,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "ElasticCollision/game/c_game.pyx":45
+  /* "c_game.pyx":45
  * 
  * except ImportError:
  *     raise ImportError("\n<pygame> library is missing on your system."             # <<<<<<<<<<<<<<
@@ -2801,14 +2797,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_ElasticCollision__c_game) {
+  if (__pyx_module_is_main_c_game) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "ElasticCollision.c_game")) {
-      if (unlikely(PyDict_SetItemString(modules, "ElasticCollision.c_game", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "c_game")) {
+      if (unlikely(PyDict_SetItemString(modules, "c_game", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -2829,7 +2825,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "ElasticCollision/game/c_game.pyx":35
+  /* "c_game.pyx":35
  * 
  * 
  * import warnings             # <<<<<<<<<<<<<<
@@ -2841,7 +2837,7 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_warnings, __pyx_t_1) < 0) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "ElasticCollision/game/c_game.pyx":36
+  /* "c_game.pyx":36
  * 
  * import warnings
  * warnings.filterwarnings("ignore", category=FutureWarning)             # <<<<<<<<<<<<<<
@@ -2862,7 +2858,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "ElasticCollision/game/c_game.pyx":37
+  /* "c_game.pyx":37
  * import warnings
  * warnings.filterwarnings("ignore", category=FutureWarning)
  * warnings.filterwarnings("ignore", category=RuntimeWarning)             # <<<<<<<<<<<<<<
@@ -2883,7 +2879,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "ElasticCollision/game/c_game.pyx":38
+  /* "c_game.pyx":38
  * warnings.filterwarnings("ignore", category=FutureWarning)
  * warnings.filterwarnings("ignore", category=RuntimeWarning)
  * warnings.filterwarnings("ignore", category=ImportWarning)             # <<<<<<<<<<<<<<
@@ -2904,7 +2900,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "ElasticCollision/game/c_game.pyx":41
+  /* "c_game.pyx":41
  * 
  * 
  * try:             # <<<<<<<<<<<<<<
@@ -2920,7 +2916,7 @@ if (!__Pyx_RefNanny) {
     __Pyx_XGOTREF(__pyx_t_6);
     /*try:*/ {
 
-      /* "ElasticCollision/game/c_game.pyx":42
+      /* "c_game.pyx":42
  * 
  * try:
  *     import pygame             # <<<<<<<<<<<<<<
@@ -2932,7 +2928,7 @@ if (!__Pyx_RefNanny) {
       if (PyDict_SetItem(__pyx_d, __pyx_n_s_pygame, __pyx_t_1) < 0) __PYX_ERR(0, 42, __pyx_L2_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "ElasticCollision/game/c_game.pyx":41
+      /* "c_game.pyx":41
  * 
  * 
  * try:             # <<<<<<<<<<<<<<
@@ -2949,7 +2945,7 @@ if (!__Pyx_RefNanny) {
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "ElasticCollision/game/c_game.pyx":44
+    /* "c_game.pyx":44
  *     import pygame
  * 
  * except ImportError:             # <<<<<<<<<<<<<<
@@ -2958,13 +2954,13 @@ if (!__Pyx_RefNanny) {
  */
     __pyx_t_7 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ImportError);
     if (__pyx_t_7) {
-      __Pyx_AddTraceback("ElasticCollision.c_game", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("c_game", __pyx_clineno, __pyx_lineno, __pyx_filename);
       if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3) < 0) __PYX_ERR(0, 44, __pyx_L4_except_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_GOTREF(__pyx_t_3);
 
-      /* "ElasticCollision/game/c_game.pyx":45
+      /* "c_game.pyx":45
  * 
  * except ImportError:
  *     raise ImportError("\n<pygame> library is missing on your system."             # <<<<<<<<<<<<<<
@@ -2980,7 +2976,7 @@ if (!__Pyx_RefNanny) {
     goto __pyx_L4_except_error;
     __pyx_L4_except_error:;
 
-    /* "ElasticCollision/game/c_game.pyx":41
+    /* "c_game.pyx":41
  * 
  * 
  * try:             # <<<<<<<<<<<<<<
@@ -2995,7 +2991,7 @@ if (!__Pyx_RefNanny) {
     __pyx_L7_try_end:;
   }
 
-  /* "ElasticCollision/game/c_game.pyx":48
+  /* "c_game.pyx":48
  *           "\nTry: \n   C:\\pip install pygame on a window command prompt.")
  * 
  * from pygame.math import Vector2             # <<<<<<<<<<<<<<
@@ -3016,7 +3012,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "ElasticCollision/game/c_game.pyx":52
+  /* "c_game.pyx":52
  * 
  * # Cython is require
  * try:             # <<<<<<<<<<<<<<
@@ -3027,7 +3023,7 @@ if (!__Pyx_RefNanny) {
     (void)__pyx_t_6; (void)__pyx_t_5; (void)__pyx_t_4; /* mark used */
     /*try:*/ {
 
-      /* "ElasticCollision/game/c_game.pyx":53
+      /* "c_game.pyx":53
  * # Cython is require
  * try:
  *     cimport cython             # <<<<<<<<<<<<<<
@@ -3037,7 +3033,7 @@ if (!__Pyx_RefNanny) {
     }
   }
 
-  /* "ElasticCollision/game/c_game.pyx":1
+  /* "c_game.pyx":1
  * # cython: boundscheck=False, wraparound=False, nonecheck=False, cdivision=True, optimize.use_switch=True             # <<<<<<<<<<<<<<
  * # encoding: utf-8
  * """
@@ -3057,11 +3053,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_8);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init ElasticCollision.c_game", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init c_game", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_CLEAR(__pyx_m);
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init ElasticCollision.c_game");
+    PyErr_SetString(PyExc_ImportError, "init c_game");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

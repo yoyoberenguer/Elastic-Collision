@@ -781,7 +781,7 @@ class Collision:
                     m1 = rect1.mass
                     m2 = rect2.mass
                     v11_angle_free, v12_angle_free = momentum_trigonometry(
-                        x1, x2, v1, v2, float(m1), float(m2), invert=True)
+                        x1, x2, v1, v2, float(m1), float(m2), invert=False)
 
                     v1 = Vector2(rect1.p1.momentum[0], rect1.p1.momentum[1])
                     v2 = Vector2(rect2.p1.momentum[0], rect2.p1.momentum[1])
@@ -790,7 +790,7 @@ class Collision:
                     m1 = rect1.mass
                     m2 = rect2.mass
                     v11_trigonometry, v12_trigonometry = momentum_trigonometry_c(
-                        v1.x, v1.y, m1, x1.x, x1.y, v2.x, v2.y, m2, x2.x, x2.y, invert=True)
+                        v1.x, v1.y, m1, x1.x, x1.y, v2.x, v2.y, m2, x2.x, x2.y, invert=False)
 
                     # v1 = pygame.math.Vector2(rect1.p1.momentum[0], rect1.p1.momentum[1])
                     # v2 = pygame.math.Vector2(rect2.p1.momentum[0], rect2.p1.momentum[1])
@@ -810,15 +810,15 @@ class Collision:
                     # v11_trigonometry, v12_trigonometry = momentum_angle_free_c(
                     #     v1.x, v1.y, v2.x, v2.y, m1, m2, x1.x, x1.y, x2.x, x2.y, invert=True)
 
-                    p = 1e-5
-                    diff1 = v11_angle_free.x - v11_trigonometry.x
-                    diff2 = v11_angle_free.y - v11_trigonometry.y
-                    diff3 = v12_angle_free.x - v12_trigonometry.x
-                    diff4 = v12_angle_free.y - v12_trigonometry.y
-                    assert diff1 < p, "diff1 %s %s %s" % (v11_angle_free.x, v11_trigonometry.x, diff1)
-                    assert diff2 < p, "diff2 %s %s %s" % (v11_angle_free.y, v11_trigonometry.y, diff2)
-                    assert diff3 < p, "diff3 %s %s %s" % (v12_angle_free.x, v12_trigonometry.x, diff3)
-                    assert diff3 < p, "diff4 %s %s %s" % (v12_angle_free.y, v12_trigonometry.y, diff4)
+                    # p = 1e-5
+                    # diff1 = v11_angle_free.x - v11_trigonometry.x
+                    # diff2 = v11_angle_free.y - v11_trigonometry.y
+                    # diff3 = v12_angle_free.x - v12_trigonometry.x
+                    # diff4 = v12_angle_free.y - v12_trigonometry.y
+                    # assert diff1 < p, "diff1 %s %s %s" % (v11_angle_free.x, v11_trigonometry.x, diff1)
+                    # assert diff2 < p, "diff2 %s %s %s" % (v11_angle_free.y, v11_trigonometry.y, diff2)
+                    # assert diff3 < p, "diff3 %s %s %s" % (v12_angle_free.x, v12_trigonometry.x, diff3)
+                    # assert diff3 < p, "diff4 %s %s %s" % (v12_angle_free.y, v12_trigonometry.y, diff4)
 
                     # Add components x,y to the vertex momentum
                     rect1.p1.momentum[0] = v11_angle_free.x

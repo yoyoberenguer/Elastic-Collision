@@ -117,6 +117,13 @@ cpdef tuple momentum_angle_free_c(
     
     * v1_x & v1_y & v2_x, v2_y are un-normalized vectors (vector components) in order to 
       keep the total kinetic energy and to redistribute the force to the final velocities (v1 & v2) 
+      
+    NOTE : 
+    If you are working in a real domain system coordinate (cartesian system), prefer to use 
+    the module:
+    - <real> for real domain application instead.
+    This method is essentially the same than momentum_trigonometry_real but it offers the possibility
+    to invert the final vectors trajectories
     
     :param v1_x: float; object 1 velocity along the x-axis
     :param v1_y: float; object 1 velocity along the y-axis
@@ -144,7 +151,7 @@ cpdef tuple momentum_angle_free_c(
         vector2d vector1 = v.v12
         vector2d vector2 = v.v21
 
-    return Vector2(vector1.x, -vector1.y), Vector2(vector2.x, -vector2.y)
+    return Vector2(vector1.x, vector1.y), Vector2(vector2.x, vector2.y)
 
 
 @cython.boundscheck(False)
@@ -173,10 +180,12 @@ cpdef tuple momentum_trigonometry_c(
     * v1_x & v1_y & v2_x, v2_y are un-normalized vectors (vector components) in order to 
       keep the total kinetic energy and to redistribute the force to the final velocities (v1 & v2) 
     
-    * By default invert is false as this library is design to work for 2d elastic collision 
-      in a game space system coordinate where y axis is always inverted, and all input data 
-      should already satisfy this requirement. Therefore if this is not the case, you can set
-       the variable invert to true. 
+    NOTE : 
+    If you are working in a real domain system coordinate (cartesian system), prefer to use 
+    the module:
+    - <real> for real domain application instead.
+    This method is essentially the same than momentum_trigonometry_real but it offers the possibility
+    to invert the final vectors trajectories
     
     :param v1x : float, object 1 velocity along the x-axis
     :param v1y : float, object 1 velocity along the y-axis
@@ -223,7 +232,7 @@ cpdef tuple momentum_trigonometry_c(
         vector2d vector1 = obj_c.v12
         vector2d vector2 = obj_c.v21
 
-    return Vector2(vector1.x, -vector1.y), Vector2(vector2.x, -vector2.y)
+    return Vector2(vector1.x, vector1.y), Vector2(vector2.x, vector2.y)
 
 
 

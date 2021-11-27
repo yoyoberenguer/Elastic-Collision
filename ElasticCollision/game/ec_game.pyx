@@ -118,6 +118,8 @@ cpdef tuple momentum_trigonometry(
     If you are working in a real domain system coordinate (cartesian system), prefer to use 
     the module:
     - <real> for real domain application instead.
+    This method is essentially the same than momentum_trigonometry_real but it offers the possibility
+    to invert the final vectors trajectories
     
     :param obj1_centre: Vector2; Centre of object 1. This vector is not normalized and the components x, y 
     correspond to the object position on the screen    
@@ -157,8 +159,8 @@ cpdef tuple momentum_trigonometry(
             obj1_mass, obj2_mass)
 
     # axis-y is inverted
-    return Vector2(collision.vector1.x, -collision.vector1.y), \
-           Vector2(collision.vector2.x, -collision.vector2.y)
+    return Vector2(collision.vector1.x, collision.vector1.y), \
+           Vector2(collision.vector2.x, collision.vector2.y)
 
 
 # **************************** ANGLE FREE **********************************************************
@@ -185,14 +187,15 @@ cpdef tuple momentum_angle_free(
     * This method can be used to resolved 2d elastic collision in 2d space system (video game 
       space) where the Y-axis is inverted.  
     
-   * obj1_vector & obj2_vector are un-normalized vectors in order to keep the total kinetic 
+    * obj1_vector & obj2_vector are un-normalized vectors in order to keep the total kinetic 
       energy and to redistribute the force to the final velocities (v1 & v2) 
     
     note : 
     If you are working in a real domain system coordinate, prefer:
     - <real> library for real domain application instead. 
-    
-    
+    this method is essentially the same than momentum_angle_free_real but it offers the possibility
+    to invert the final vectors trajectories
+      
     :param obj1_centre: Vector2; Centre of object 1. This vector is not normalized and the components x, y 
     correspond to the object position on the screen    
     :param obj2_centre: Vector2; Centre of object 2. This vector is not normalized and the components x, y 
@@ -228,7 +231,7 @@ cpdef tuple momentum_angle_free(
     v = get_angle_free_vec(vec1, vec2, obj1_mass, obj2_mass, x1_vec, x2_vec)
 
     # Y-axis is inverted
-    return Vector2(v.vector1.x, -v.vector1.y), Vector2(v.vector2.x, -v.vector2.y)
+    return Vector2(v.vector1.x, v.vector1.y), Vector2(v.vector2.x, v.vector2.y)
 
 # ***************************END INTERFACE *************************************
 
