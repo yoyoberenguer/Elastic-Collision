@@ -113,9 +113,12 @@ point of contact prior solving object's resultant vectors v1 & v2.
 Considerations:
 
 * The elastic-collision algorithm must be call after the object's collision.
-* Choose the correct module ec_game or ec_real; both modules have their 
-  own specific use, ec_game is conceive for 2d game environment where the Y-axis 
-  is by default inverted, while ec_real is working with classic 2d cartesian space.
+* You have the choice between ec_game & ec_real. These libraries are essentially 
+  identical except for ec_game that offers the possibility to invert the final vectors 
+  trajectories using the flag `invert`. Inverting the flag will provide the correct
+  solution of the object collision if you were to draw the vectors on a 2d cartesian 
+  system. Do not set the flag True for 2d video game environment, the flag is set to False
+  by default.
 * Trigonometric method is less accurate than the angle free method due to angle 
   approximation and due to the fact that the library is build on single 
   precision (float) with an error margin of 1e-5
@@ -142,6 +145,7 @@ Object centre           |
 **C1 ( 0, 0)**          | 
 **C2 (1.414, 1.414)**   | 
 
+`Figure 1` 
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/RealDomain.PNG)
 
 * Game environement (Y-Axis inverted )
@@ -156,25 +160,45 @@ Object centre           |
 **C1 ( 0, 0)**          | 
 **C2 (1.414, 1.414)**   | 
 
+`Figure 2`
+
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/GameDomain.PNG)
 
 As you can see both domains return the same values. 
 However, in the real cartesian domain the red ball will be moving at 45 degrees
 while and on the game display, the reb ball will be moving at -45 degrees. 
-In order to display correctly the collision on screen, we would have to invert
-the Y-component of the solution provided by the elastic-collision equations. 
-This is what provide the library ec_game (methods trigonometric and angle free).
+`In order to convert one model to another`, we would have to invert the Y-component of 
+the solution provided by the elastic-collision equations such as :
 
 Vector direction        | Resultant                 |   y component inverted     |
 ------------------------|---------------------------|----------------------------|
-**v1( 0.707,  0.707)**  | **v1'(-0.707, -0.707)**   | **v1'(-0.707, 0.707)**     |
-**v2(-0.707, -0.707)**  | **v2'( 0.707,  0.707)**   | **v2'( 0.707,  -0.707)**   |
+**v1( 0.707, 0.707)**  | **v1'(-0.707,-0.707)**   | **v1'(-0.707, 0.707)**     |
+**v2(-0.707,-0.707)**  | **v2'( 0.707, 0.707)**   | **v2'( 0.707,-0.707)**   |
 
+### Inversion flag in ec_game methods
+The inversion flag is just a convenient way to convert the solution from ec_game algorithms 
+(momentum_trigonometry & momentum_angle_free) to a 2d cartesian system or (if you were to draw
+the final vectors v1 & v2 in a real domain).
+The flag should not be used for 2D video game.
+Below the same collision with the flag invert set to True
 
+Figure 3 (with invert flag = True): 
 
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/version-1.0.1/Assets/GameDomain_wrong_trajectory.PNG)
 
+If you are running a 2D video game as shown in figure2 (with an inverted Y-axis system coordinates or not),
+in order to display the correct final vectors trajectories v1'(-0.707, -0.707) & v2'( 0.707,  0.707) 
+you would normally call the algorithm such as :
+```
+momentum_trigonometry(
+    obj1_centre, obj2_centre, obj1_vector, obj2_vector, obj1_mass, obj2_mass) 
+or 
+momentum_angle_free(
+    obj1_vector, obj2_vector, obj1_mass, obj2_mass, obj1_centre, obj2_centre)
+```
 
  * The project is under the `MIT license`
+
 ## Installation 
 check the link for newest version https://pypi.org/project/ElasticCollision/
 ```
@@ -255,14 +279,13 @@ v11, v12 = momentum_trigonometry(
     centre1, centre2, vector1, vector2, mass1, mass2, True)
 ```
 
-## Demo 
+## Objects collisions DEMO
 ```
 C:\ ... \real\>python simulation.py
 or 
 C:\ ... \game\>python simulation.py
-
 ```
-
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/version-1.0.1/Assets/BouncingBalls.gif)
 
 ## Building cython code
 

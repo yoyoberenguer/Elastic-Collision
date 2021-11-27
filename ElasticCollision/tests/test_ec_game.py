@@ -13,11 +13,6 @@ except ImportError:
                       "\nTry: \n   C:\\pip install pygame on a window command prompt.")
 
 from pygame.math import Vector2
-# from ElasticCollision.ec_game import momentum_trigonometry, momentum_angle_free, get_momentum_trigonometry_v1v2, \
-#     get_v11, get_v12, get_v1_angle_free_v1, get_v2_angle_free_v2, get_angle_free_v1v2, \
-#     get_theta_angle_, get_contact_angle_
-#
-# from ElasticCollision.c_game import momentum_angle_free_c, momentum_trigonometry_c
 
 from ElasticCollision.c_game import momentum_angle_free_c, momentum_trigonometry_c
 from ElasticCollision.ec_game import momentum_trigonometry, momentum_angle_free, get_momentum_trigonometry_v1v2, \
@@ -55,17 +50,17 @@ class TestMomentumTrigonometry(unittest.TestCase):
         print("Momentum trigonometry - object1 vector : (x:%s y:%s) ", (v11.x, v11.y))
         print("Momentum trigonometry - object2 vector : (x:%s y:%s) ", (v12.x , v12.y))
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v11.y, 3), -round(math.sin(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v12.x, 3), round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v12.y, 3), -round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
 
         # Invert is True both object are not colliding (object with opposite direction)
         v11, v12 = momentum_trigonometry(centre1, centre2, vector1, vector2, mass1, mass2, invert=True)
 
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v11.y, 3), -round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v12.x, 3), round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v12.y, 3), -round(math.sin(math.pi / 4.0), 3))
 
         # Verification with angle free method
         v11, v12 = momentum_trigonometry(centre1, centre2, vector1, vector2, mass1, mass2)
@@ -97,9 +92,9 @@ class TestMomentumTrigonometry(unittest.TestCase):
         mass2 = 1.0
         v11, v12 = momentum_trigonometry(centre1, centre2, vector1, vector2, mass1, mass2, invert=False)
         self.assertTrue(round(v11.x, 3) == 0.000)
-        self.assertTrue(round(v11.y, 3) == 0.707)
+        self.assertTrue(round(v11.y, 3) == -0.707)
         self.assertTrue(round(v12.x, 3) == 0.000)
-        self.assertTrue(round(v12.y, 3) == -0.707)
+        self.assertTrue(round(v12.y, 3) == 0.707)
 
         # object 2 on the left of object 1
         vector1 = Vector2(-0.707, 0)
@@ -146,17 +141,17 @@ class TestAngleFree(unittest.TestCase):
         print("Momentum angle free - object1 vector : (x:%s y:%s) ", (v11.x, v11.y))
         print("Momentum angle free - object2 vector : (x:%s y:%s) ", (v12.x , v12.y))
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v11.y, 3), -round(math.sin(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v12.x, 3), round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v12.y, 3), -round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
 
         # Invert is True both objects are not colliding (object with opposite direction)
         v11, v12 = momentum_angle_free(vector1, vector2, mass1, mass2, centre1, centre2, invert=True)
 
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v11.y, 3), -round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v12.x, 3), round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v12.y, 3), -round(math.sin(math.pi / 4.0), 3))
 
         # Verification with angle free method
         v11, v12 = momentum_trigonometry(centre1, centre2, vector1, vector2, mass1, mass2)
@@ -174,9 +169,9 @@ class TestAngleFree(unittest.TestCase):
         mass2 = 1.0
         v11, v12 = momentum_angle_free(vector1, vector2, mass1, mass2, centre1, centre2, invert=False)
         self.assertTrue(round(v11.x, 3) == 0.707)
-        self.assertTrue(round(v11.y, 3) == -0.707)
+        self.assertTrue(round(v11.y, 3) == 0.707)
         self.assertTrue(round(v12.x, 3) == -0.707)
-        self.assertTrue(round(v12.y, 3) == 0.707)
+        self.assertTrue(round(v12.y, 3) == -0.707)
 
         vector1 = Vector2(-0.707, 0.707)
         centre1 = Vector2(0.0, 0.0)
@@ -186,9 +181,9 @@ class TestAngleFree(unittest.TestCase):
         mass2 = 1.0
         v11, v12 = momentum_angle_free(vector1, vector2, mass1, mass2, centre1, centre2, invert=False)
         self.assertTrue(round(v11.x, 3) == 0.707)
-        self.assertTrue(round(v11.y, 3) == 0.707)
+        self.assertTrue(round(v11.y, 3) == -0.707)
         self.assertTrue(round(v12.x, 3) == -0.707)
-        self.assertTrue(round(v12.y, 3) == -0.707)
+        self.assertTrue(round(v12.y, 3) == 0.707)
 
 
 class TestGetMomentumTrigonometry_v1v2(unittest.TestCase):

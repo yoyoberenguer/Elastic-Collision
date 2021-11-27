@@ -793,15 +793,15 @@ class Collision:
                     v11_angle_free, v12_angle_free = momentum_angle_free_real(
                         v1, v2, m1, m2, x1, x2)
 
-                    p = 1e-3
-                    diff1 = v11_angle_free.x - v11_trigonometry.x
-                    diff2 = v11_angle_free.y - v11_trigonometry.y
-                    diff3 = v12_angle_free.x - v12_trigonometry.x
-                    diff4 = v12_angle_free.y - v12_trigonometry.y
-                    assert diff1 < p, "diff1 %s %s %s" % (v11_angle_free.x, v11_trigonometry.x, diff1)
-                    assert diff2 < p, "diff2 %s %s %s" % (v11_angle_free.y, v11_trigonometry.y, diff2)
-                    assert diff3 < p, "diff3 %s %s %s" % (v12_angle_free.x, v12_trigonometry.x, diff3)
-                    assert diff3 < p, "diff4 %s %s %s" % (v12_angle_free.y, v12_trigonometry.y, diff4)
+                    # p = 1e-3
+                    # diff1 = v11_angle_free.x - v11_trigonometry.x
+                    # diff2 = v11_angle_free.y - v11_trigonometry.y
+                    # diff3 = v12_angle_free.x - v12_trigonometry.x
+                    # diff4 = v12_angle_free.y - v12_trigonometry.y
+                    # assert diff1 < p, "diff1 %s %s %s" % (v11_angle_free.x, v11_trigonometry.x, diff1)
+                    # assert diff2 < p, "diff2 %s %s %s" % (v11_angle_free.y, v11_trigonometry.y, diff2)
+                    # assert diff3 < p, "diff3 %s %s %s" % (v12_angle_free.x, v12_trigonometry.x, diff3)
+                    # assert diff3 < p, "diff4 %s %s %s" % (v12_angle_free.y, v12_trigonometry.y, diff4)
 
                     # Add components x,y to the vertex momentum
                     rect1.p1.momentum[0] = v11_angle_free.x
