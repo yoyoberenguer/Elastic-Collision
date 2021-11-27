@@ -135,30 +135,26 @@ Considerations:
 
 * Real domain R(x, y)
 
-Vector direction        | Resultant            
-------------------------|--------------------------|
-**v1( 0.707,  0.707)**  | **v1'(-0.707, -0.707)**  |
-**v2(-0.707, -0.707)**  | **v2'( 0.707,  0.707)**  |
+Vector direction        | Resultant                |  Object centre       | 
+------------------------|--------------------------|----------------------|
+**v1( 0.707,  0.707)**  | **v1'(-0.707, -0.707)**  | **C1 ( 0, 0)**       |
+**v2(-0.707, -0.707)**  | **v2'( 0.707,  0.707)**  |**C2 (1.414, 1.414)** |
 
-Object centre           | 
-------------------------|
-**C1 ( 0, 0)**          | 
-**C2 (1.414, 1.414)**   | 
+`figure 1`
 
-`Figure 1` 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/RealDomain.PNG)
+
+**![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/RealDomain.PNG)**
+
+
+
 
 * Game environement (Y-Axis inverted )
 
-Vector direction        | Resultant 
-------------------------|--------------------------|
-**v1( 0.707,  0.707)**  | **v1'(-0.707, -0.707)**  |
-**v2(-0.707, -0.707)**  | **v2'( 0.707,  0.707)**  |
+Vector direction        | Resultant                |  Object centre         |
+------------------------|--------------------------|------------------------|
+**v1( 0.707,  0.707)**  | **v1'(-0.707, -0.707)**  |**C1 ( 0, 0)**          | 
+**v2(-0.707, -0.707)**  | **v2'( 0.707,  0.707)**  |**C2 (1.414, 1.414)**   | 
 
-Object centre           | 
-------------------------|
-**C1 ( 0, 0)**          | 
-**C2 (1.414, 1.414)**   | 
 
 `Figure 2`
 
@@ -182,7 +178,7 @@ the final vectors v1 & v2 in a real domain).
 The flag should not be used for 2D video game.
 Below the same collision with the flag invert set to True
 
-Figure 3 (with invert flag = True): 
+`Figure 3` (with invert flag = True)
 
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/version-1.0.1/Assets/GameDomain_wrong_trajectory.PNG)
 
@@ -197,7 +193,7 @@ momentum_angle_free(
     obj1_vector, obj2_vector, obj1_mass, obj2_mass, obj1_centre, obj2_centre)
 ```
 
- * The project is under the `MIT license`
+* The project is under the `MIT license`
 
 ## Installation 
 check the link for newest version https://pypi.org/project/ElasticCollision/
@@ -213,8 +209,6 @@ pip install ElasticCollision==1.0.2
 >>>from ElasticCollision.ec_game import __version__
 >>>__version__
 ```
-
-
 ## Elastic-collision method details
 
 ```cython
