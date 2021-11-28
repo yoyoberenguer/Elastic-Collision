@@ -23,18 +23,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 """
-import random
-
-import pygame
-from pygame.locals import *
-
+import sys
 from math import hypot, sqrt
 from random import uniform, randint
 import time
 import threading
-from ElasticCollision.ec_real import momentum_trigonometry_real, momentum_angle_free_real
-
+import pygame
 from pygame.math import Vector2
+from ec_real import momentum_angle_free_real
+
 
 # Screen size
 SIZE = (1024, 1024)
@@ -52,9 +49,10 @@ LIMIT_LOW = -15
 
 DECAY_LOCK = threading.Lock()
 
+BALL = []
+COLOR = []
 
-class Error(BaseException):
-    pass
+SCREEN = pygame.display.set_mode((UPPER[0], UPPER[1]), vsync=1)
 
 
 class Decay(threading.Thread):
@@ -67,19 +65,19 @@ class Decay(threading.Thread):
 
         # particle instance variable
         self.particle = particle
-        Decay.particles[str(particle.id)] = time.time()
-        self.ThreadId = id(self)
+        Decay.particles[str(particle.vertex_id)] = time.time()
+        self.thread_id = id(self)
         self.breakup = False
 
     def run(self):
-        global DECAY_LOCK
+
         while not self.breakup:
             DECAY_LOCK.acquire()
             for name, age in Decay.particles.items():
 
-                if name == str(self.particle.id):
+                if name == str(self.particle.vertex_id):
                     if time.time() - age > 20:
-                        Decay.particles.pop(str(self.particle.id))
+                        Decay.particles.pop(str(self.particle.vertex_id))
                         self.particle.remove_from_inventory()
                         self.breakup = False
 
@@ -128,14 +126,14 @@ class Deformation(threading.Thread):
                        0.85, 0.87, 0.9, 0.92, 0.95, 0.98]
 
         # Thread identification
-        self.id = id(self)
+        self.deformation_id = id(self)
 
     def cancel_deformation(self):
         """Function used to cancel an object deformation """
 
         i = 0
-        for r_ in Deformation.DeformationInventory:
-            if r_.name == self.object.name:
+        for obj in Deformation.DeformationInventory:
+            if obj.name == self.object.name:
                 Deformation.DeformationInventory.pop(i)
             else:
                 i += 1
@@ -145,22 +143,22 @@ class Deformation(threading.Thread):
         # Return if a deformation is already active
         if self.object in Deformation.DeformationInventory:
             return
-        else:
-            Deformation.DeformationInventory.append(self.object)
 
-        j_ = 0
-        for r_ in self.data:
+        Deformation.DeformationInventory.append(self.object)
+
+        index = 0
+        for obj in self.data:
 
             # Check if the ball has not been deleted/exploded after a collision
             if self.object in Engine.objects:
                 # Apply deformation to x,y
-                self.object.x_deformation = r_
-                self.object.y_deformation = self.data_r[j_]
+                self.object.x_deformation = obj
+                self.object.y_deformation = self.data_r[index]
 
                 # Adjust the delay below for the deformation duration.
                 # default 0.01
                 time.sleep(0.01)
-                j_ += 1
+                index += 1
 
             else:
                 # Removing object from the active deformation list 'DeformationInventory'
@@ -177,7 +175,7 @@ class Deformation(threading.Thread):
         self.cancel_deformation()
 
 
-class Momentum(object):
+class Momentum():
     """
     CLASS MOMENTUM : ASSIGN A MOMENTUM TO A SINGLE VERTEX/POINT
     """
@@ -192,11 +190,20 @@ class Momentum(object):
     # Decorator for component x
     @property
     def vx(self) -> float:
+        """
+
+        :return:
+        """
         return self.__vx
 
     # component x with a range (-LIMIT_LOW,LIMIT_HIGH)
     @vx.setter
     def vx(self, vx: float) -> None:
+        """
+
+        :param vx:
+        :return:
+        """
         if vx > LIMIT_HIGH:
             self.__vx = LIMIT_HIGH
 
@@ -208,11 +215,20 @@ class Momentum(object):
     # Decorator for component y
     @property
     def vy(self) -> float:
+        """
+
+        :return:
+        """
         return self.__vy
 
     # component y has also a range (-LIMIT_LOW,LIMIT_HIGH)
     @vy.setter
     def vy(self, vy: float) -> None:
+        """
+
+        :param vy:
+        :return:
+        """
         if vy > LIMIT_HIGH:
             self.__vy = LIMIT_HIGH
         elif vy < LIMIT_LOW:
@@ -221,37 +237,57 @@ class Momentum(object):
             self.__vy = vy
 
     def __add__(self, other: object) -> object:
+        """
+
+        :param other:
+        :return:
+        """
         if isinstance(other, Momentum):
             self.vx += other.vx
             self.vy += other.vy
             return Momentum(self.vx, self.vy)
-        else:
-            raise TypeError(
-                '\nArgument other is not a '
-                'momentum type, got %s ' % type(other))
+
+        raise TypeError(
+            '\nArgument other is not a '
+            'momentum type, got %s ' % type(other))
 
     def __sub__(self, other : object) -> object:
+        """
+
+        :param other:
+        :return:
+        """
         if isinstance(other, Momentum):
             self.vx -= other.vx
             self.vy -= other.vy
             return Momentum(self.vx, self.vy)
-        else:
-            raise TypeError(
-                '\nArgument other is not a '
-                'momentum type, got %s ' % type(other))
+
+        raise TypeError(
+            '\nArgument other is not a '
+            'momentum type, got %s ' % type(other))
 
     def __mul__(self, other: object) -> object:
+        """
+
+        :param other:
+        :return:
+        """
         if isinstance(other, Momentum):
             self.vx *= other
             self.vy *= other
             return Momentum(self.vx, self.vy)
-        else:
-            raise TypeError(
-                '\nArgument other is not a '
-                'momentum type, got %s ' % type(other))
+
+        raise TypeError(
+            '\nArgument other is not a '
+            'momentum type, got %s ' % type(other))
 
     @staticmethod
     def inverse(momentum_: object) -> None:
+        """
+
+        :param momentum_:
+        :return:
+        """
         if hasattr(momentum_, "vx"):
             momentum_.vx *= -1.0
             momentum_.vy *= -1.0
@@ -261,15 +297,25 @@ class Momentum(object):
                 'momentum type, got %s ' % type(momentum_))
 
     def __getitem__(self, k: float) -> float:
+        """
+
+        :param k:
+        :return:
+        """
         if 0 <= k < len(self.__dict__.values()):
             if k == 0:
                 return self.vx
-            else:
-                return self.vy
-        else:
-            raise IndexError('IndexError: list index out of range')
+            return self.vy
+
+        raise IndexError('IndexError: list index out of range')
 
     def __setitem__(self, k : int, v : float) -> None:
+        """
+
+        :param k:
+        :param v:
+        :return:
+        """
 
         if 0 <= k < len(self.__dict__.values()):
             if k == 0:
@@ -280,10 +326,18 @@ class Momentum(object):
             raise IndexError('IndexError: list index out of range')
 
     def __repr__(self) -> str:
+        """
+
+        :return:
+        """
         return "({0.vx!r}, {0.vy!r})".format(self)
 
     # Return the velocity/Motion
     def velocity(self) -> float:
+        """
+
+        :return:
+        """
         return hypot(self.vx, self.vy)
 
 
@@ -292,7 +346,7 @@ VERTEX_INVENTORY = []
 SPLINE = []
 
 
-class Vertex(object):
+class Vertex():
     """ Class Vertex (x : integer ,y: integer) """
 
     # Constructor
@@ -305,7 +359,7 @@ class Vertex(object):
 
     def __init__(self, x: float = 0, y: float = 0) -> None:
         # Private variables
-        self.id = id(self)
+        self.vertex_id = id(self)
 
         # Set the momentum to zero (vector length zero)
         self.momentum = Momentum(0.0, 0.0)
@@ -319,10 +373,19 @@ class Vertex(object):
     # Decorator for x properties
     @property
     def x(self) -> float:
+        """
+
+        :return:
+        """
         return self.__x
 
     @x.setter
     def x(self, x: float) -> None:
+        """
+
+        :param x:
+        :return:
+        """
         self.__x = x
         if x < LOWER[0] or x > (UPPER[0] - 50):
             if x < LOWER[0]:
@@ -335,10 +398,19 @@ class Vertex(object):
 
     @property
     def y(self: float) -> float:
+        """
+
+        :return:
+        """
         return self.__y
 
     @y.setter
     def y(self, y: float) -> None:
+        """
+
+        :param y:
+        :return:
+        """
 
         self.__y = y
         if (y < LOWER[1]) or (y > UPPER[1] - 50):
@@ -351,16 +423,26 @@ class Vertex(object):
             self.momentum[1] *= -1
 
     def __add__(self, point: object) -> object:
+        """
+
+        :param point:
+        :return:
+        """
         if isinstance(point, Vertex):
             self.x += point.x
             self.y += point.y
             return Vertex(self.x, self.y)
-        else:
-            raise TypeError(
-                'Argument point is not a '
-                'Vertex instance got %s ' % type(point))
+
+        raise TypeError(
+            'Argument point is not a '
+            'Vertex instance got %s ' % type(point))
 
     def __sub__(self, point : object) -> object:
+        """
+
+        :param point:
+        :return:
+        """
         if isinstance(point, Vertex):
             self.x -= point.x
             self.y -= point.y
@@ -370,100 +452,166 @@ class Vertex(object):
             'Vertex instance got %s ' % type(point))
 
     def __invert__(self) -> object:
+        """
+
+        :return:
+        """
         self.x = -self.x
         self.y = -self.y
         return Vertex(self.x, self.y)
 
     def __abs__(self) -> object:
+        """
+
+        :return:
+        """
         self.x = abs(self.x)
         self.y = abs(self.y)
         return Vertex(self.x, self.y)
 
     def __mul__(self, point : object) -> object:
+        """
+
+        :param point:
+        :return:
+        """
         if isinstance(point, Vertex):
             self.x *= point.x
             self.y *= point.y
             return Vertex(self.x, self.y)
-        else:
-            raise TypeError(
-                'Argument point is not a '
-                'Vertex instance got %s ' % type(point))
+
+        raise TypeError(
+            'Argument point is not a '
+            'Vertex instance got %s ' % type(point))
 
     def __floordiv__(self, point: object) -> object:
+        """
+
+        :param point:
+        :return:
+        """
         if isinstance(point, Vertex):
             self.x /= point.x
             self.y /= point.y
             return Vertex(self.x, self.y)
-        else:
-            raise TypeError(
-                'Argument point is not a '
-                'Vertex instance got %s ' % type(point))
+
+        raise TypeError(
+            'Argument point is not a '
+            'Vertex instance got %s ' % type(point))
 
     def __lt__(self, point: object) -> bool:
+        """
+
+        :param point:
+        :return:
+        """
         if isinstance(point, Vertex):
             return hypot(self.x, self.y) < hypot(point.x, point.y)
-        else:
-            raise TypeError(
-                'Argument point is not a '
-                'Vertex instance got %s ' % type(point))
+
+        raise TypeError(
+            'Argument point is not a '
+            'Vertex instance got %s ' % type(point))
 
     def __eq__(self, point: object) -> bool:
+        """
+
+        :param point:
+        :return:
+        """
         if isinstance(point, Vertex):
             return self.x == point.x and self.y == point.y
-        else:
-            raise TypeError(
-                'Argument point is not a '
-                'Vertex instance got %s ' % type(point))
+
+        raise TypeError(
+            'Argument point is not a '
+            'Vertex instance got %s ' % type(point))
 
     def __repr__(self) -> str:
-        return "Vertex {0._id!r}(x={0._x!r}, y={0._y!r})".format(self)
+        """
+
+        :return:
+        """
+        return "Vertex {0.vertex_id!r}(x={0.x!r}, y={0.y!r})".format(self)
 
     # Show the Vertex position (x,y)
     def position(self) -> tuple:
+        """
+
+        :return:
+        """
         return self.x, self.y
 
     # my_list all instances/vertexes from the inventory
     @staticmethod
     def show_inventory() -> None:
-        for r_ in VERTEX_INVENTORY:
-            print('Vertex : %s' % r_)
+        """
+
+        :return:
+        """
+        for vertex in VERTEX_INVENTORY:
+            print('Vertex : %s' % vertex)
 
     # Add and object (instance/vertex) into the inventory
     def add_to_inventory(self) -> None:
+        """
+
+        :return:
+        """
         if self not in VERTEX_INVENTORY:
             VERTEX_INVENTORY.append(self)
 
     # Remove a specific vertex from the inventory
     @staticmethod
     def v_remove_from_inventory(vertex : object) -> None:
+        """
+
+        :param vertex:
+        :return:
+        """
+
         try:
             if vertex in VERTEX_INVENTORY:
                 VERTEX_INVENTORY.remove(vertex)
                 print('Vertex id %s removed from inventory.' % vertex.id)
-        except Exception as Err:
-            print(Err)
-            raise Error('Vertex with id %s cannot be remove from inventory.' % vertex.id)
+        except Exception as err:
+            print(err)
+            raise ValueError('Vertex with id %s cannot be remove from inventory.' % vertex.id)
 
     def add_to_spline(self) -> None:
+        """
+
+        :return:
+        """
         SPLINE.append(self)
 
     @staticmethod
     def remove_from_spline():
+        """
+
+        :return:
+        """
         return NotImplemented
 
     @staticmethod
     def show_spline():
+        """
+
+        :return:
+        """
         return NotImplemented
 
 
 _RECTANGLE_INVENTORY = []
 
 
-class Rectangle(object):
+class Rectangle:
     """ Class Rectangle (Point1 : Vertex, Point2 : Vertex) """
 
     # Constructor:
     # self.id is the unique ID instance number
+
+    # pylint: disable=too-many-instance-attributes
+    # pylint: disable=too-many-arguments
+
     def __init__(self,
                  p1: Vertex,
                  p2: Vertex,
@@ -493,7 +641,7 @@ class Rectangle(object):
         self.x_deformation = x_deformation
         self.y_deformation = y_deformation
 
-        self.id = id(self)
+        self.rectangle_id = id(self)
         # object mass_ in kg
         self.mass = mass_
         # object name_ (Integer)
@@ -505,50 +653,83 @@ class Rectangle(object):
 
     @property
     def x_deformation(self) -> float:
-        return self.__Xdeformation
+        """
+
+        :return:
+        """
+        return self.__xdeformation
 
     @x_deformation.setter
     def x_deformation(self, x: float) -> None:
-        self.__Xdeformation = x
+        """
+
+        :param x:
+        :return:
+        """
+        self.__xdeformation = x
         if 0 < x < 1:
-            self.__Xdeformation = x
+            self.__xdeformation = x
 
     # momentum = mass x velocity
-    def Momentum(self, velocity_vector) -> float:
+    def momentum(self, velocity_vector) -> float:
+        """
+
+        :param velocity_vector:
+        :return:
+        """
         return self.mass * velocity_vector
 
         # Add Rectangle to the inventory
 
     def add_to_inventory(self) -> None:
+        """
+
+        :return:
+        """
         if self not in _RECTANGLE_INVENTORY:
             _RECTANGLE_INVENTORY.append(self)
 
     # my_list all Rectangle/Instance from the inventory
     @staticmethod
     def show_inventory() -> None:
+        """
+
+        :return:
+        """
         for rect in _RECTANGLE_INVENTORY:
             print('Rectangle : %s' % rect)
 
     # Remove a specific Rectangle from the inventory
     def remove_from_inventory(self) -> None:
+        """
+
+        :return:
+        """
 
         if isinstance(self, Rectangle):
             try:
 
                 if self in _RECTANGLE_INVENTORY:
                     _RECTANGLE_INVENTORY.remove(self)
-                    print('Rectangle id %s removed from inventory.' % self.id)
+                    print('Rectangle id %s removed from inventory.' % self.rectangle_id)
                     Vertex.v_remove_from_inventory(self.p1)
                     Vertex.v_remove_from_inventory(self.p2)
 
-            except Exception as Err:
-                raise ValueError('Rectangle id %s cannot be remove from inventory.\n%s' % (self.id, Err))
+            except Exception as err:
+                raise ValueError(
+                    'Rectangle id %s cannot be remove from '
+                    'inventory.\n%s' % (self.rectangle_id, err))
 
         else:
             raise TypeError('\nIncorrect type for object Rectangle got %s ' % type(Rectangle))
 
     @staticmethod
     def function(*args) -> tuple:
+        """
+
+        :param args:
+        :return:
+        """
         for x, y in args:
             if x is None:
                 x = 0
@@ -557,42 +738,61 @@ class Rectangle(object):
             return x, y
 
     def __add__(self, *args) -> object:
+        """
+
+        :param args:
+        :return:
+        """
         if isinstance(args[0], tuple):
 
             if len(*args) != 2:
-                raise Error('\nInvalid argument')
+                raise ValueError('\nInvalid argument')
 
             x, y = self.function(*args)
             self.p1.x += x if LOWER[0] <= x <= UPPER[0] else 0
             self.p1.y += y if LOWER[0] <= y <= UPPER[1] else 0
             return self.p1
-        else:
-            raise TypeError('\nArgument must be a tuple (x,y) got %s ' % type(args[0]))
+
+        raise TypeError('\nArgument must be a tuple (x,y) got %s ' % type(args[0]))
 
     def __sub__(self, *args) -> object:
+        """
+
+        :param args:
+        :return:
+        """
         if isinstance(args[0], tuple):
 
             if len(*args) > 2:
-                raise Error('\nInvalid argument')
+                raise ValueError('\nInvalid argument')
 
             x, y = self.function(*args)
             self.p1.x -= x if LOWER[0] <= x <= UPPER[0] else 0
             self.p1.y -= y if LOWER[0] <= y <= UPPER[1] else 0
             return self.p1
 
-        else:
-            raise TypeError('\nArgument must be a tuple (x,y) got %s ' % type(args[0]))
+
+        raise TypeError('\nArgument must be a tuple (x,y) got %s ' % type(args[0]))
 
     @staticmethod
     def intersection(rect1: object, rect2: object) -> bool:
-        """ detect collision between objects """
+        """
+        detect collision between objects
+        :param rect1:
+        :param rect2:
+        :return:
+        """
         ctr_to_ctr = Rectangle.center_distance(rect1, rect2)
         if ctr_to_ctr <= (rect1.p2.x / 2.0 + rect2.p2.x / 2.0):
             return True
-        else:
-            return False
+
+        return False
 
     def __repr__(self) -> str:
+        """
+
+        :return:
+        """
 
         return "{0.name}({0.p1.x!r},{0.p1.y!r})-" \
                "({0.p2.x!r},{0.p2.y!r})".format(self)
@@ -601,17 +801,33 @@ class Rectangle(object):
     # This dict can be use during the construction of a PyGame
     # rectangle by passing the whole dict as an argument
     def my_list(self) -> list:
+        """
+
+        :return:
+        """
         return [self.p1.x, self.p1.y, self.p2.x, self.p2.y]
 
     @staticmethod
     # Distance between two vertexes of rectangles
     def vertex_distance(point1 : Vertex, point2: Vertex) -> float:
+        """
+
+        :param point1:
+        :param point2:
+        :return:
+        """
         return sqrt((point1.x - point2.x) * (point1.x - point2.x)
                     + (point1.y - point2.y) * (point1.y - point2.y))
 
     @staticmethod
     # Distance between two rectangles (from center of mass)
     def center_distance(rect1: object, rect2: object) -> float:
+        """
+
+        :param rect1:
+        :param rect2:
+        :return:
+        """
         c1 : list = rect1.center()
         c2 : list = rect2.center()
         return sqrt((c1[0] - c2[0]) * (c1[0] - c2[0]) +
@@ -619,6 +835,10 @@ class Rectangle(object):
 
     # center of mass is the mean position of the mass in an object
     def center(self) -> list:
+        """
+
+        :return:
+        """
         m1 = self.p1.x + (self.p2.x / 2.0)
         m2 = self.p1.y + (self.p2.y / 2.0)
         return [m1, m2]
@@ -664,6 +884,11 @@ class Collision:
             self.objects.append(object_)
 
     def remove_object(self, object_) -> None:
+        """
+
+        :param object_:
+        :return:
+        """
         if object_ in self.objects:
             self.objects.pop(object_)
 
@@ -676,9 +901,9 @@ class Collision:
             if item.name == object_.name:
                 # object_ found into the list at position n
                 break
-            else:
-                # object_ not found, increment counter
-                n += 1
+
+            # object_ not found, increment counter
+            n += 1
 
         # Remove object_ (position n) from the list
         my_list.pop(n)
@@ -708,9 +933,11 @@ class Collision:
 
     @staticmethod
     def explode(obj1: Rectangle) -> None:
+        """
 
-        global BALL
-        global COLOR
+        :param obj1:
+        :return:
+        """
 
         # Checking if object is existing into the 2D Engine
         if obj1 not in Engine.objects:
@@ -738,11 +965,12 @@ class Collision:
         if obj1.mass < 1:
             return
 
-        for r_ in range(particles):
+        for part in range(particles):
             # particle with random mass
             obj_mass = uniform(0.1, 0.9)
 
-            rect = Rectangle(Vertex(x, y), Vertex(size, size), obj_mass, str(len(BALL) + r_), 0, 0)
+            rect = Rectangle(Vertex(x, y), Vertex(size, size),
+                             obj_mass, str(len(BALL) + part), 0, 0)
 
             # Add the particle to the drawable list
             BALL.append(rect)
@@ -756,12 +984,17 @@ class Collision:
             Decay(rect).start()
 
         # Add a momentum for every new particles
-        for r_ in BALL[len(BALL) - particles:]:
-            r_.p1.Momentum[0] = randint(-10, 10)
-            r_.p1.Momentum[1] = randint(-10, 10)
+        for part in BALL[len(BALL) - particles:]:
+            part.p1.Momentum[0] = randint(-10, 10)
+            part.p1.Momentum[1] = randint(-10, 10)
 
     @classmethod
     def detect(cls, engine_: object) -> None:
+        """
+
+        :param engine_:
+        :return:
+        """
 
         ind = 0
 
@@ -772,17 +1005,6 @@ class Collision:
 
                 # objects are colliding
                 if Rectangle.intersection(rect1, rect2):
-
-                    v1 = Vector2(rect1.p1.momentum[0], rect1.p1.momentum[1])
-                    v2 = Vector2(rect2.p1.momentum[0], rect2.p1.momentum[1])
-
-                    x1 = Vector2(rect1.center())
-                    x2 = Vector2(rect2.center())
-                    m1 = rect1.mass
-                    m2 = rect2.mass
-
-                    v11_trigonometry, v12_trigonometry = momentum_trigonometry_real(
-                        x1, x2, v1, v2, float(m1), float(m2))
 
                     v1 = Vector2(rect1.p1.momentum[0], rect1.p1.momentum[1])
                     v2 = Vector2(rect2.p1.momentum[0], rect2.p1.momentum[1])
@@ -798,10 +1020,14 @@ class Collision:
                     # diff2 = v11_angle_free.y - v11_trigonometry.y
                     # diff3 = v12_angle_free.x - v12_trigonometry.x
                     # diff4 = v12_angle_free.y - v12_trigonometry.y
-                    # assert diff1 < p, "diff1 %s %s %s" % (v11_angle_free.x, v11_trigonometry.x, diff1)
-                    # assert diff2 < p, "diff2 %s %s %s" % (v11_angle_free.y, v11_trigonometry.y, diff2)
-                    # assert diff3 < p, "diff3 %s %s %s" % (v12_angle_free.x, v12_trigonometry.x, diff3)
-                    # assert diff3 < p, "diff4 %s %s %s" % (v12_angle_free.y, v12_trigonometry.y, diff4)
+                    # assert diff1 < p, "diff1 %s %s %s" % \
+                    #                   (v11_angle_free.x, v11_trigonometry.x, diff1)
+                    # assert diff2 < p, "diff2 %s %s %s" % \
+                    #                   (v11_angle_free.y, v11_trigonometry.y, diff2)
+                    # assert diff3 < p, "diff3 %s %s %s" % \
+                    #                   (v12_angle_free.x, v12_trigonometry.x, diff3)
+                    # assert diff3 < p, "diff4 %s %s %s" % \
+                    #                   (v12_angle_free.y, v12_trigonometry.y, diff4)
 
                     # Add components x,y to the vertex momentum
                     rect1.p1.momentum[0] = v11_angle_free.x
@@ -818,23 +1044,15 @@ class Collision:
                     if Rectangle.center_distance(rect1, rect2) <= rect1.p1.x + rect2.p2.x:
                         Collision.un_stick(rect1, rect2, v11_angle_free, v12_angle_free)
 
-                    # if Obj in engine_.objects:
-                    #     Deformation(Obj).start()
-                    #
-                    # if obj in engine_.objects:
-                    #     Deformation(obj).start()
-
-
-class GL(object):
-    def __init_(self):
-        self.screen = None
+                    # Deformation(rect1).start()
+                    # Deformation(rect2).start()
 
 
 if __name__ == '__main__':
 
     # BackGroundCollection = ['..//Assets//ph-10046.jpg']
     pygame.display.set_caption("Elastic-collision demo")
-    GL.screen = pygame.display.set_mode((UPPER[0], UPPER[1]), vsync=1)
+
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     GREEN = (106, 195, 61)
@@ -842,21 +1060,19 @@ if __name__ == '__main__':
     BLUE = (49, 136, 207)
     ORANGE = (201, 100, 55)
 
-    balls = 50
+    BALLS = 50
+    MASS = 10
+    DIAMETER = 50
 
     while True:
 
-        BALL = []
-        COLOR = []
+        for ball in range(BALLS):
 
-        for ball in range(balls):
-            mass = 10      # random.randint(10 , 50)
-            diameter = 50  # size of the ball
             BALL.append(
                 Rectangle(
                     Vertex(randint(LOWER[0], UPPER[0]),
                            randint(LOWER[1], UPPER[1])),
-                    Vertex(diameter, diameter), mass, str(ball), 1.0, 1.0))
+                    Vertex(DIAMETER, DIAMETER), MASS, str(ball), 1.0, 1.0))
             COLOR.append((randint(10, 255), randint(10, 255), randint(20, 255)))
 
         for ball in BALL:
@@ -879,12 +1095,10 @@ if __name__ == '__main__':
         if not Collision.detect(Engine):
             # Breaking the loop
             break
-        else:
-            Engine.objects = []
+        Engine.objects = []
 
     print('\nStarting Engine')
 
-    Poster = 0
     N = -400
 
     pygame.mixer.pre_init(44100, 16, 2, 4095)
@@ -892,56 +1106,62 @@ if __name__ == '__main__':
 
     # background = pygame.image.load(BackGroundCollection[0]).convert()
 
-    Font = pygame.font.SysFont("arial", 10)
+    FONT = pygame.font.SysFont("arial", 10)
 
     pygame.mouse.set_visible(True)
 
     # Loop until the user clicks the close button.
-    done = False
+    DONE = False
 
     # Used to manage how fast the screen updates
-    clock = pygame.time.Clock()
+    CLOCK = pygame.time.Clock()
 
-    pos1, pos2 = (0, 0), (0, 0)
-    Vector = False
+    POS1, POS2 = (0, 0), (0, 0)
+    VECTOR = False
 
     # -------- Main Program Loop -----------
-    while not done:
+    while not DONE:
         # --- Main event loop
         for event in pygame.event.get():  # User did something
 
             keys = pygame.key.get_pressed()
 
             if event.type == pygame.QUIT:
-                done = True
+                DONE = True
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                Vector = True
-                pos1 = pygame.mouse.get_pos()
+                VECTOR = True
+                POS1 = pygame.mouse.get_pos()
 
             elif event.type == pygame.MOUSEBUTTONUP:
-                pos2 = pygame.mouse.get_pos()
-                Vector = False
-                for r in BALL:
-                    r.p1.momentum[0] = pos2[0] - pos1[0]
-                    r.p1.momentum[1] = pos2[1] - pos1[1]
+                POS2 = pygame.mouse.get_pos()
+                VECTOR = False
+                dx = POS2[0] - POS1[0]
+                dy = POS2[1] - POS1[1]
+                if dx !=0.0 and dy !=0.0:
+                    for r in BALL:
+                        r.p1.momentum[0] = dx
+                        r.p1.momentum[1] = dy
+
+
+
 
             elif event.type == pygame.MOUSEMOTION:
-                pos2 = pygame.mouse.get_pos()
+                POS2 = pygame.mouse.get_pos()
 
-            if keys[K_ESCAPE]:
-                done = True
+            if keys[pygame.K_ESCAPE]:
+                DONE = True
 
         pressed_mouse = pygame.mouse.get_pressed()
 
-        GL.screen.fill(BLACK)
+        SCREEN.fill(BLACK)
         # GL.screen.blit(background, (N, 0))
 
         I_ = 0
         for r in BALL:
 
             pygame.draw.ellipse(
-                GL.screen, COLOR[I_],
+                SCREEN, COLOR[I_],
                 [int(r.center()[0]), int(r.center()[1]), int(r.p2.x / 2) * 2 * r.x_deformation,
                  int(r.p2.x / 2) * 2 * r.y_deformation
                  ])
@@ -949,8 +1169,8 @@ if __name__ == '__main__':
 
         Collision.detect(Engine)
 
-        if Vector:
-            pygame.draw.line(GL.screen, RED, list(pos1), list(pos2), 1)
+        if VECTOR:
+            pygame.draw.line(SCREEN, RED, list(POS1), list(POS2), 1)
 
         j = 1
         for r in BALL:
@@ -967,6 +1187,6 @@ if __name__ == '__main__':
         pygame.display.flip()
 
         # --- Limit to 60 frames per second
-        clock.tick(100)
+        CLOCK.tick(100)
 
-    pygame.quit()
+    sys.exit(0)
