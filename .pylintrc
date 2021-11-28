@@ -13,10 +13,6 @@ jobs=1
 # complex, nested conditions.
 limit-inference-results=100
 
-# List of plugins (as comma separated values of python module names) to load,
-# usually to register additional checkers.
-load-plugins=
-
 # Minimum Python version to use for version dependent checks. Will default to
 # the version used to run pylint.
 py-version=3.6
