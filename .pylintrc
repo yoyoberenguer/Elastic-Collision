@@ -32,7 +32,7 @@ ignore-patterns=
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
-init-hook="from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))"
+# init-hook="from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))"
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
 # number of processors available to use.
@@ -200,7 +200,7 @@ function-naming-style=snake_case
 #function-rgx=
 
 # Good variable names which should always be accepted, separated by a comma.
-good-names=i,j,k,ex,Run,_,pk,x,y, v1, v2, x1, x2, c1, c2, m1, m2, n, p1, p2, vx, vy, v, r
+good-names=i,j,k,ex,Run,_,pk,x,y,v1,v2,x1,x2,c1,c2,m1,m2,n,p1,p2,vx,vy,v,r
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
