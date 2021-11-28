@@ -1,21 +1,15 @@
 """"
 TEST LIBRARY C_GAME, EC_GAME
 """
-
+import sys
 import unittest
 import math
-
-try:
-    import pygame
-
-except ImportError:
-    raise ImportError("\n<pygame> library is missing on your system."
-                      "\nTry: \n   C:\\pip install pygame on a window command prompt.")
 
 from pygame.math import Vector2
 
 from ElasticCollision.c_game import momentum_angle_free_c, momentum_trigonometry_c
-from ElasticCollision.ec_game import momentum_trigonometry, momentum_angle_free, get_momentum_trigonometry_v1v2, \
+from ElasticCollision.ec_game import momentum_trigonometry, momentum_angle_free, \
+    get_momentum_trigonometry_v1v2, \
      get_v11, get_v12, get_v1_angle_free_v1, get_v2_angle_free_v2, get_angle_free_v1v2, \
      get_theta_angle_, get_contact_angle_
 
@@ -25,7 +19,8 @@ class TestMomentumTrigonometry(unittest.TestCase):
     Test Momentum Trigonometry momentum_trigonometry
     """
 
-    def runTest(self) -> None:
+    # pylint: disable=too-many-statements
+    def run_test(self) -> None:
         """
 
         :return:  void
@@ -55,7 +50,8 @@ class TestMomentumTrigonometry(unittest.TestCase):
         self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
 
         # Invert is True both object are not colliding (object with opposite direction)
-        v11, v12 = momentum_trigonometry(centre1, centre2, vector1, vector2, mass1, mass2, invert=True)
+        v11, v12 = momentum_trigonometry(
+            centre1, centre2, vector1, vector2, mass1, mass2, invert=True)
 
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
@@ -77,7 +73,8 @@ class TestMomentumTrigonometry(unittest.TestCase):
         centre2 = Vector2(1.4142, 0)
         mass1 = 1.0
         mass2 = 1.0
-        v11, v12 = momentum_trigonometry(centre1, centre2, vector1, vector2, mass1, mass2, invert=False)
+        v11, v12 = momentum_trigonometry(
+            centre1, centre2, vector1, vector2, mass1, mass2, invert=False)
         self.assertTrue(round(v11.x, 3) == -0.707)
         self.assertTrue(round(v11.y, 3) == 0.000)
         self.assertTrue(round(v12.x, 3) == 0.707)
@@ -90,7 +87,8 @@ class TestMomentumTrigonometry(unittest.TestCase):
         centre2 = Vector2(0, 1.4142)
         mass1 = 1.0
         mass2 = 1.0
-        v11, v12 = momentum_trigonometry(centre1, centre2, vector1, vector2, mass1, mass2, invert=False)
+        v11, v12 = momentum_trigonometry(
+            centre1, centre2, vector1, vector2, mass1, mass2, invert=False)
         self.assertTrue(round(v11.x, 3) == 0.000)
         self.assertTrue(round(v11.y, 3) == -0.707)
         self.assertTrue(round(v12.x, 3) == 0.000)
@@ -103,7 +101,8 @@ class TestMomentumTrigonometry(unittest.TestCase):
         centre2 = Vector2(-1.4142, 0)
         mass1 = 1.0
         mass2 = 1.0
-        v11, v12 = momentum_trigonometry(centre1, centre2, vector1, vector2, mass1, mass2, invert=False)
+        v11, v12 = momentum_trigonometry(
+            centre1, centre2, vector1, vector2, mass1, mass2, invert=False)
         self.assertTrue(round(v11.x, 3) == 0.707)
         self.assertTrue(round(v11.y, 3) == 0.000)
         self.assertTrue(round(v12.x, 3) == -0.707)
@@ -115,7 +114,8 @@ class TestAngleFree(unittest.TestCase):
     Test Momentum Angle free momentum_angle_free
     """
 
-    def runTest(self) -> None:
+    # pylint: disable=too-many-statements
+    def run_test(self) -> None:
         """
 
         :return:  void
@@ -146,7 +146,8 @@ class TestAngleFree(unittest.TestCase):
         self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
 
         # Invert is True both objects are not colliding (object with opposite direction)
-        v11, v12 = momentum_angle_free(vector1, vector2, mass1, mass2, centre1, centre2, invert=True)
+        v11, v12 = momentum_angle_free(
+            vector1, vector2, mass1, mass2, centre1, centre2, invert=True)
 
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
@@ -167,7 +168,8 @@ class TestAngleFree(unittest.TestCase):
         centre2 = Vector2(-1.4142, -1.4142)
         mass1 = 1.0
         mass2 = 1.0
-        v11, v12 = momentum_angle_free(vector1, vector2, mass1, mass2, centre1, centre2, invert=False)
+        v11, v12 = momentum_angle_free(
+            vector1, vector2, mass1, mass2, centre1, centre2, invert=False)
         self.assertTrue(round(v11.x, 3) == 0.707)
         self.assertTrue(round(v11.y, 3) == 0.707)
         self.assertTrue(round(v12.x, 3) == -0.707)
@@ -179,7 +181,8 @@ class TestAngleFree(unittest.TestCase):
         centre2 = Vector2(-1.4142, 1.4142)
         mass1 = 1.0
         mass2 = 1.0
-        v11, v12 = momentum_angle_free(vector1, vector2, mass1, mass2, centre1, centre2, invert=False)
+        v11, v12 = momentum_angle_free(
+            vector1, vector2, mass1, mass2, centre1, centre2, invert=False)
         self.assertTrue(round(v11.x, 3) == 0.707)
         self.assertTrue(round(v11.y, 3) == -0.707)
         self.assertTrue(round(v12.x, 3) == -0.707)
@@ -191,7 +194,7 @@ class TestGetMomentumTrigonometry_v1v2(unittest.TestCase):
     Test Momentum Angle free momentum_angle_free
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         RETURN VECTORS V1 & V2 OF ORIGINAL OBJECTS AFTER COLLISION
 
@@ -243,7 +246,7 @@ class TestGetV1(unittest.TestCase):
 
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         RETURN SCALAR SIZE V1 OF THE ORIGINAL OBJECT REPRESENTED BY (V1, THETA1, M1)
         :return:  void
@@ -291,7 +294,7 @@ class TestGetV2(unittest.TestCase):
 
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         RETURN SCALAR SIZE V2_ OF THE ORIGINAL OBJECT REPRESENTED BY (V2_, THETA2_, M2_)
 
@@ -341,7 +344,7 @@ class TestGetV1AngleFree(unittest.TestCase):
 
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         SCALAR SIZE V1_ OF THE ORIGINAL OBJECT SPEED REPRESENTED BY (V1_, M1_, X1 ARGUMENTS).
         :return:  void
@@ -381,7 +384,7 @@ class TestGetV2AngleFree(unittest.TestCase):
     )nogil:
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         scalar size v2_ of the original object speed represented by (v2_, m2_, x2 arguments).
         :return:  void
@@ -420,7 +423,7 @@ class TestAngleFreeVec(unittest.TestCase):
         vector2d x2
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         RETURN V1 & V2 angle free method
         :return:  void
@@ -463,7 +466,7 @@ class TestThetaAngle(unittest.TestCase):
     Test get_theta_angle
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         RETURN THETA ANGLE Θ IN RADIANS [Π, -Π]
         cdef inline float get_theta_angle(vector2d vector_)nogil
@@ -507,7 +510,7 @@ class TestGetContactAngle(unittest.TestCase):
     Test get_contact_angle
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         RETURN THE CONTACT ANGLE Φ [Π, -Π] IN RADIANS BETWEEN OBJ1 AND OBJ2.
 
@@ -547,7 +550,7 @@ class TestMomentumAngleFreeC(unittest.TestCase):
     Test momentum_angle_free_c (External C version)
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (ANGLE FREE METHOD)
 
@@ -586,9 +589,9 @@ class TestMomentumAngleFreeC(unittest.TestCase):
         print("Momentum angle free - object1 vector : (x:%s y:%s) ", (v11.x, v11.y))
         print("Momentum angle free - object2 vector : (x:%s y:%s) ", (v12.x, v12.y))
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v11.y, 3), -round(math.sin(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v12.x, 3), round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v12.y, 3), -round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
 
         # Testing Y-axis inversion
         # After inverting the Y-axis both object are moving in an opposite direction
@@ -604,9 +607,9 @@ class TestMomentumAngleFreeC(unittest.TestCase):
         )
         print(v11, v12)
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v11.y, 3), -round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v12.x, 3), round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v12.y, 3), -round(math.sin(math.pi / 4.0), 3))
 
 
 class TestMomentumTrigonometryC(unittest.TestCase):
@@ -614,7 +617,7 @@ class TestMomentumTrigonometryC(unittest.TestCase):
     Test momentum_trigonometry_c (External C version)
     """
 
-    def runTest(self) -> None:
+    def run_test(self) -> None:
         """
         RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (TRIGONOMETRY)
 
@@ -655,9 +658,9 @@ class TestMomentumTrigonometryC(unittest.TestCase):
         print("Momentum angle free - object1 vector : (x:%s y:%s) ", (v11.x, v11.y))
         print("Momentum angle free - object2 vector : (x:%s y:%s) ", (v12.x, v12.y))
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v11.y, 3), -round(math.sin(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v12.x, 3), round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v12.y, 3), -round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
 
         # Testing Y-axis inversion
         # After inverting the Y-axis both object are moving in an opposite direction
@@ -674,9 +677,9 @@ class TestMomentumTrigonometryC(unittest.TestCase):
         )
         print(v11, v12)
         self.assertAlmostEqual(round(v11.x, 3), -round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v11.y, 3), -round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v11.y, 3), round(math.sin(math.pi / 4.0), 3))
         self.assertAlmostEqual(round(v12.x, 3), round(math.cos(math.pi / 4.0), 3))
-        self.assertAlmostEqual(round(v12.y, 3), round(math.sin(math.pi / 4.0), 3))
+        self.assertAlmostEqual(round(v12.y, 3), -round(math.sin(math.pi / 4.0), 3))
 
 
 def run_testsuite():
@@ -705,9 +708,9 @@ def run_testsuite():
     ])
 
     unittest.TextTestRunner().run(suite)
-    pygame.quit()
+    sys.exit(0)
 
 
 if __name__ == '__main__':
     run_testsuite()
-    pygame.quit()
+    sys.exit(0)

@@ -1,16 +1,9 @@
 """"
 TEST LIBRARY ec_real
 """
-
+import sys
 import unittest
 import math
-
-try:
-    import pygame
-
-except ImportError:
-    raise ImportError("\n<pygame> library is missing on your system."
-                      "\nTry: \n   C:\\pip install pygame on a window command prompt.")
 
 from pygame.math import Vector2
 from ElasticCollision.ec_real import momentum_trigonometry_real, momentum_angle_free_real
@@ -20,8 +13,8 @@ class TestMomentumTrigonometryReal(unittest.TestCase):
     """
     Test Momentum Trigonometry momentum_trigonometry_real
     """
-
-    def runTest(self) -> None:
+    # pylint: disable=too-many-statements
+    def run_test(self) -> None:
         """
         cpdef tuple momentum_trigonometry_real(
         obj1_centre : Vector2,
@@ -119,7 +112,8 @@ class TestAngleFreeReal(unittest.TestCase):
     Test Momentum Angle free momentum_angle_free
     """
 
-    def runTest(self) -> None:
+    # pylint: disable=too-many-statements
+    def run_test(self) -> None:
         """
         cpdef tuple momentum_angle_free_real(
         obj1_vector  : Vector2,
@@ -212,9 +206,8 @@ def run_testsuite():
     ])
 
     unittest.TextTestRunner().run(suite)
-    pygame.quit()
 
 
 if __name__ == '__main__':
     run_testsuite()
-    pygame.quit()
+    sys.exit(0)
