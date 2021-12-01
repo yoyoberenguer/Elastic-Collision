@@ -2,6 +2,15 @@
 
 For Python language 
 
+## Objects collisions DEMO
+```
+C:\ ... \real\>python simulation.py
+or 
+C:\ ... \game\>python simulation.py
+```
+![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/version-1.0.1/Assets/BouncingBalls.gif)
+
+
 ### Definition (from wikipedia):
 `WIKIPEDIA`
 
@@ -272,14 +281,6 @@ mass2 = 1.0
 v11, v12 = momentum_trigonometry(
     centre1, centre2, vector1, vector2, mass1, mass2, True)
 ```
-
-## Objects collisions DEMO
-```
-C:\ ... \real\>python simulation.py
-or 
-C:\ ... \game\>python simulation.py
-```
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/version-1.0.1/Assets/BouncingBalls.gif)
 
 ## Building cython code
 
