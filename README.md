@@ -93,12 +93,12 @@ Where the angle brackets indicate the inner product (or dot product) of two vect
 
 This library contains the following methods written in Cython and C language:
 
-1) `Trigonometry method`
+1) **Trigonometry method**
     This equation is derived from the fact that the interaction between the two bodies 
     is easily calculated along the contact angle
    
 
-2) `Angle free method` 
+2) **Angle free method**
     In an angle-free representation, the changed velocities are computed using the 
     centres x1 and x2 at the time of contact as
    
@@ -120,29 +120,37 @@ trigonometry method requires calculation of object's contact angle and angle the
 point of contact prior solving object's resultant vectors v1 & v2.
 
 Considerations:
+```
 
 * The elastic-collision algorithm must be call after the object's collision.
+
 * You have the choice between ec_game & ec_real. These libraries are essentially 
   identical except for ec_game that offers the possibility to invert the final vectors 
   trajectories using the flag `invert`. Inverting the flag will provide the correct
   solution of the object collision if you were to draw the vectors on a 2d cartesian 
-  system. Do not set the flag True for 2d video game environment, the flag is set to False
-  by default.
+  system (without the y-axis inverted). 
+  Do not set the flag to True for 2d video game environment (the flag is set to False
+  by default).
+  
 * Trigonometric method is less accurate than the angle free method due to angle 
   approximation and due to the fact that the library is build on single 
   precision (float) with an error margin of 1e-5
+  
 * Input vectors are not normalized to conserve the total Kinetic energy 
+```
 
- Difference between a display axis and cartesian space:
+ ### Difference between a display and cartesian space:
  
  If an object position is at the centre of the display, we would have to decrease its (Y) 
  value in order to move it upward and increase its (Y) value to move it downward. 
- In other words, the display's Y-axis is inverted and this difference has to be taken 
+ In other words, the display's Y-axis is inverted and this has to be taken 
  into account in the elastic collision equations. 
  This can be easily implemented by reversing the (Y) vectors component for each object 
  before or after contact.
+ 
+---
 
-* Real domain R(x, y)
+* **Real domain R(x, y)**
 
 Vector direction        | Resultant                |  Object centre       | 
 ------------------------|--------------------------|----------------------|
@@ -155,9 +163,9 @@ Vector direction        | Resultant                |  Object centre       |
 **![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/RealDomain.PNG)**
 
 
+---
 
-
-* Game environement (Y-Axis inverted )
+* **Game environement (Y-Axis inverted )**
 
 Vector direction        | Resultant                |  Object centre         |
 ------------------------|--------------------------|------------------------|
@@ -180,31 +188,10 @@ Vector direction        | Resultant                 |   y component inverted    
 **v1( 0.707, 0.707)**  | **v1'(-0.707,-0.707)**   | **v1'(-0.707, 0.707)**     |
 **v2(-0.707,-0.707)**  | **v2'( 0.707, 0.707)**   | **v2'( 0.707,-0.707)**   |
 
-### Inversion flag in ec_game methods
-The inversion flag is just a convenient way to convert the solution from ec_game algorithms 
-(momentum_trigonometry & momentum_angle_free) to a 2d cartesian system or (if you were to draw
-the final vectors v1 & v2 in a real domain).
-The flag should not be used for 2D video game.
-Below the same collision with the flag invert set to True
-
-`Figure 3` (with invert flag = True)
-
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/version-1.0.1/Assets/GameDomain_wrong_trajectory.PNG)
-
-If you are running a 2D video game as shown in figure2 (with an inverted Y-axis system coordinates or not),
-in order to display the correct final vectors trajectories v1'(-0.707, -0.707) & v2'( 0.707,  0.707) 
-you would normally call the algorithm such as :
-```
-momentum_trigonometry(
-    obj1_centre, obj2_centre, obj1_vector, obj2_vector, obj1_mass, obj2_mass) 
-or 
-momentum_angle_free(
-    obj1_vector, obj2_vector, obj1_mass, obj2_mass, obj1_centre, obj2_centre)
-```
 
 * The project is under the `MIT license`
 
-## Installation 
+### Installation 
 check the link for newest version https://pypi.org/project/ElasticCollision/
 ```
 pip install ElasticCollision 
@@ -218,55 +205,10 @@ pip install ElasticCollision==1.0.2
 >>>from ElasticCollision.ec_game import __version__
 >>>__version__
 ```
-## Elastic-collision method details
 
-```cython
-# ************************* GAME DOMAIN ********************************
-# GAME VERSION (CYTHON)
-# RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (TRIGONOMETRY) 
-cpdef tuple momentum_trigonometry(
-    obj1_centre : Vector2,
-    obj2_centre : Vector2,
-    obj1_vector : Vector2,
-    obj2_vector : Vector2,
-    obj1_mass   : float,
-    obj2_mass   : float,
-    invert      : bool=False)
 
-# RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (ANGLE FREE METHOD)
-cpdef tuple momentum_angle_free(
-    obj1_vector  : Vector2,
-    obj2_vector  : Vector2,
-    obj1_mass    : float,
-    obj2_mass    : float,
-    obj1_centre  : Vector2,
-    obj2_centre  : Vector2,
-    invert       : bool=False)
 
-# ************************* REAL DOMAIN ********************************
-
-# RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (TRIGONOMETRY) 
-cpdef tuple momentum_trigonometry_real(
-    obj1_centre : Vector2,
-    obj2_centre : Vector2,
-    obj1_vector : Vector2,
-    obj2_vector : Vector2,
-    obj1_mass   : float,
-    obj2_mass   : float,
-    invert      : bool=False)
-
- # RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (ANGLE FREE METHOD)   
-cpdef tuple momentum_angle_free_real(
-    obj1_vector  : Vector2,
-    obj2_vector  : Vector2,
-    obj1_mass    : float,
-    obj2_mass    : float,
-    obj1_centre  : Vector2,
-    obj2_centre  : Vector2,
-    invert       : bool=False)
-```
-
-## Quick example
+### Trigonometry quick example 
 
 ```python
 from pygame.math import Vector2
@@ -279,10 +221,38 @@ centre2 = Vector2(1.4142, 1.4142)
 mass1 = 1.0
 mass2 = 1.0
 v11, v12 = momentum_trigonometry(
-    centre1, centre2, vector1, vector2, mass1, mass2, True)
+    centre1, centre2, vector1, vector2, mass1, mass2, False)
+print(v11, v12)
 ```
 
-## Building cython code
+### angle_free quick example
+
+```python
+from pygame.math import Vector2
+from ElasticCollision.ec_game import momentum_angle_free
+
+vector1 = Vector2(0.707, 0.707)
+centre1 = Vector2(0.0, 0.0)
+vector2 = Vector2(-0.707, -0.707)
+centre2 = Vector2(1.4142, 1.4142)
+mass1 = 1.0
+mass2 = 1.0
+v11, v12 = momentum_angle_free(
+    vector1, vector2, mass1, mass2, centre1, centre2, False)
+print(v11, v12)
+```
+
+```python
+== RESTART: C:/Users/yoyob/AppData/Local/Programs/Python/Python36/test11.py ==
+pygame 2.0.0 (SDL 2.0.12, python 3.6.3)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+[-0.707, -0.707] [0.707001, 0.707]
+[-0.707, -0.707] [0.707, 0.707]
+>>> 
+```
+
+
+### Building cython code
 
 #### When do you need to compile the cython code ? 
 
@@ -316,14 +286,14 @@ make sure cython and a C-compiler are correctly install on your
 ## Credit
 Yoann Berenguer 
 
-## Dependencies :
+### Dependencies :
 ```
 numpy >= 1.18
 pygame >=2.0.0
 cython >=0.29.21
 ```
 
-## License :
+### License :
 
 MIT License
 
@@ -351,7 +321,7 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 
-## Testing: 
+### Testing: 
 ```python
 >>> from ElasticCollision import *
 >>> from ElasticCollision.tests.test_ec_game import run_testsuite
@@ -362,10 +332,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 >>> run_testsuite()
 ```
 
-## Timing :
-```python
-
-```
 
 ### Links 
 ```
