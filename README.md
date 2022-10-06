@@ -10,6 +10,11 @@ C:\ ... \game\>python simulation.py
 ```
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/version-1.0.1/Assets/BouncingBalls.gif)
 
+### Simulation
+```cmd
+cd game 
+python simulation.py
+```
 
 ### Definition (from wikipedia):
 `WIKIPEDIA`
@@ -211,6 +216,7 @@ pip install ElasticCollision==1.0.2
 ### Trigonometry quick example 
 
 ```python
+# FOR 2D GAME (Y-AXIS INVERTED)
 from pygame.math import Vector2
 from ElasticCollision.ec_game import momentum_trigonometry
 
@@ -228,6 +234,7 @@ print(v11, v12)
 ### angle_free quick example
 
 ```python
+# FOR 2D GAME (Y-AXIS INVERTED)
 from pygame.math import Vector2
 from ElasticCollision.ec_game import momentum_angle_free
 
@@ -331,6 +338,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 >>> from ElasticCollision.tests.test_ec_real import run_testsuite
 >>> run_testsuite()
 ```
+
 
 
 ### Links 
