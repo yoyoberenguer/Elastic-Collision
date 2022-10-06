@@ -197,6 +197,10 @@ Vector direction        | Resultant                 |   y component inverted    
 * The project is under the `MIT license`
 
 ### Installation 
+
+Available python build 3.6, 3.7, 3.8, 3.9, 3.10 and source build
+Compatible WINDOWS for platform x86, x86_64
+
 check the link for newest version https://pypi.org/project/ElasticCollision/
 ```
 pip install ElasticCollision 
