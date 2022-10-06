@@ -2,17 +2,10 @@
 
 For Python language 
 
-## Objects collisions DEMO
-```
-C:\ ... \real\>python simulation.py
-or 
-C:\ ... \game\>python simulation.py
-```
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/version-1.0.1/Assets/BouncingBalls.gif)
 
 ### Simulation
 ```cmd
-cd game 
 python simulation.py
 ```
 
