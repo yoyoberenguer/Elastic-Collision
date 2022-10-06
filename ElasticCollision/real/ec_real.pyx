@@ -79,6 +79,8 @@ cdef extern from '../Source/vector.c':
 DEF M_PI  = 3.14159265358979323846
 DEF M_PI2 = 3.14159265358979323846 / 2.0
 
+__version__ = "1.0.5"
+
 # **************************** PYTHON INTERFACE ***************************************
 
 @cython.boundscheck(False)

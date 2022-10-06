@@ -20,7 +20,7 @@ class TestMomentumTrigonometry(unittest.TestCase):
     """
 
     # pylint: disable=too-many-statements
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
 
         :return:  void
@@ -115,7 +115,7 @@ class TestAngleFree(unittest.TestCase):
     """
 
     # pylint: disable=too-many-statements
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
 
         :return:  void
@@ -194,7 +194,7 @@ class TestGetMomentumTrigonometry_v1v2(unittest.TestCase):
     Test Momentum Angle free momentum_angle_free
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         RETURN VECTORS V1 & V2 OF ORIGINAL OBJECTS AFTER COLLISION
 
@@ -246,7 +246,7 @@ class TestGetV1(unittest.TestCase):
 
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         RETURN SCALAR SIZE V1 OF THE ORIGINAL OBJECT REPRESENTED BY (V1, THETA1, M1)
         :return:  void
@@ -294,7 +294,7 @@ class TestGetV2(unittest.TestCase):
 
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         RETURN SCALAR SIZE V2_ OF THE ORIGINAL OBJECT REPRESENTED BY (V2_, THETA2_, M2_)
 
@@ -344,7 +344,7 @@ class TestGetV1AngleFree(unittest.TestCase):
 
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         SCALAR SIZE V1_ OF THE ORIGINAL OBJECT SPEED REPRESENTED BY (V1_, M1_, X1 ARGUMENTS).
         :return:  void
@@ -384,7 +384,7 @@ class TestGetV2AngleFree(unittest.TestCase):
     )nogil:
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         scalar size v2_ of the original object speed represented by (v2_, m2_, x2 arguments).
         :return:  void
@@ -423,7 +423,7 @@ class TestAngleFreeVec(unittest.TestCase):
         vector2d x2
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         RETURN V1 & V2 angle free method
         :return:  void
@@ -466,7 +466,7 @@ class TestThetaAngle(unittest.TestCase):
     Test get_theta_angle
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         RETURN THETA ANGLE Θ IN RADIANS [Π, -Π]
         cdef inline float get_theta_angle(vector2d vector_)nogil
@@ -510,7 +510,7 @@ class TestGetContactAngle(unittest.TestCase):
     Test get_contact_angle
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         RETURN THE CONTACT ANGLE Φ [Π, -Π] IN RADIANS BETWEEN OBJ1 AND OBJ2.
 
@@ -550,7 +550,7 @@ class TestMomentumAngleFreeC(unittest.TestCase):
     Test momentum_angle_free_c (External C version)
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (ANGLE FREE METHOD)
 
@@ -617,7 +617,7 @@ class TestMomentumTrigonometryC(unittest.TestCase):
     Test momentum_trigonometry_c (External C version)
     """
 
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         RETURN VECTORS V1 & V2 AFTER OBJECT COLLISION (TRIGONOMETRY)
 

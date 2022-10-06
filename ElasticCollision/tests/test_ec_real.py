@@ -14,7 +14,7 @@ class TestMomentumTrigonometryReal(unittest.TestCase):
     Test Momentum Trigonometry momentum_trigonometry_real
     """
     # pylint: disable=too-many-statements
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         cpdef tuple momentum_trigonometry_real(
         obj1_centre : Vector2,
@@ -113,7 +113,7 @@ class TestAngleFreeReal(unittest.TestCase):
     """
 
     # pylint: disable=too-many-statements
-    def run_test(self) -> None:
+    def runTest(self) -> None:
         """
         cpdef tuple momentum_angle_free_real(
         obj1_vector  : Vector2,

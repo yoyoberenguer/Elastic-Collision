@@ -19,7 +19,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="ElasticCollision",
-    version="1.0.1",          # Actual version on PyPI is 1.0.1
+    version="1.0.5",          # Actual version on PyPI is 1.0.5, TEST is 1.0.13
     author="Yoann Berenguer",
     author_email="yoyoberenguer@hotmail.com",
     description="ElasticCollision tools for pygame and arcade games ",
@@ -30,11 +30,14 @@ setuptools.setup(
     packages=['ElasticCollision'],
     ext_modules=cythonize([
         Extension("ElasticCollision.ec_game", ["ElasticCollision/game/ec_game.pyx"],
-                  extra_compile_args=["/openmp", "/Qpar", "/fp:fast", "/O2", "/Oy", "/Ot"], language="c"),
+                  extra_compile_args=["/openmp", "/Qpar", "/fp:fast", "/O2", "/Oy", "/Ot"],
+                  language="c"),
         Extension("ElasticCollision.c_game", ["ElasticCollision/game/c_game.pyx"],
-                  extra_compile_args=["/openmp", "/Qpar", "/fp:fast", "/O2", "/Oy", "/Ot"], language="c"),
+                  extra_compile_args=["/openmp", "/Qpar", "/fp:fast", "/O2", "/Oy", "/Ot"],
+                  language="c"),
         Extension("ElasticCollision.ec_real", ["ElasticCollision/real/ec_real.pyx"],
-                  extra_compile_args=["/openmp", "/Qpar", "/fp:fast", "/O2", "/Oy", "/Ot"], language="c")]),
+                  extra_compile_args=["/openmp", "/Qpar", "/fp:fast", "/O2", "/Oy", "/Ot"],
+                  language="c")]),
     include_dirs=[numpy.get_include()],
     # define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")],
     license='MIT',
@@ -84,6 +87,7 @@ setuptools.setup(
           'pyproject.toml',
           'README.md',
           'requirements.txt',
+          'simulation.py'
           ]),
 
         ('./lib/site-packages/ElasticCollision/game',
@@ -91,7 +95,14 @@ setuptools.setup(
              'ElasticCollision/game/__init__.py',
              'ElasticCollision/game/ec_game.pyx',
              'ElasticCollision/game/c_game.pyx',
-             'ElasticCollision/game/setup_ec_game.py',
+             'ElasticCollision/game/setup_ec_game.py'
+         ]
+         ),
+        ('./lib/site-packages/ElasticCollision/real',
+         [
+             'ElasticCollision/real/__init__.py',
+             'ElasticCollision/real/ec_real.pyx',
+             'ElasticCollision/real/setup_ec_real.py'
          ]
          ),
 
@@ -102,7 +113,10 @@ setuptools.setup(
             'ElasticCollision/Assets/math3.png',
             'ElasticCollision/Assets/math4.png',
             'ElasticCollision/Assets/GameDomain.PNG',
-            'ElasticCollision/Assets/RealDomain.PNG'
+            'ElasticCollision/Assets/RealDomain.PNG',
+            'ElasticCollision/Assets/GameDomain_wrong_trajectory.PNG',
+
+
          ]),
 
         ('./lib/site-packages/ElasticCollision/tests',
