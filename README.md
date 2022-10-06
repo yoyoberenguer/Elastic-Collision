@@ -198,23 +198,44 @@ Vector direction        | Resultant                 |   y component inverted    
 
 ### Installation 
 
-Available python build 3.6, 3.7, 3.8, 3.9, 3.10 and source build
-Compatible WINDOWS for platform x86, x86_64
-
 check the link for newest version https://pypi.org/project/ElasticCollision/
+
+### Installation from pip
+
+* Available python build 3.6, 3.7, 3.8, 3.9, 3.10 and source build
+* Compatible WINDOWS and LINUX for platform x86, x86_64
 ```
 pip install ElasticCollision 
-# or version 1.0.2  
-pip install ElasticCollision==1.0.2
 ```
 
-* version installed 
-* Imported module is case sensitive 
+* Checking the installed version 
+  (*Imported module is case sensitive*) 
 ```python
 >>>from ElasticCollision.ec_game import __version__
 >>>__version__
 ```
+---
+### Installation from source code
 
+*Download the source code and decompress the Tar or zip file*
+* Linux
+```bash
+tar -xvf ElasticCollision-1.0.3.tar.gz
+cd ElasticCollision-1.0.3
+python3 setup.py bdist_wheel
+cd dist 
+pip3 install ElasticCollision-xxxxxx 
+```
+* Windows 
+
+*Decompress the archive and enter ElasticCollision directory* 
+```bash
+python setup.py bdist_wheel 
+cd dist
+pip install ElasticCollision-xxxxxx
+```
+
+---
 
 
 ### Trigonometry quick example 
