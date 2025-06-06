@@ -70,37 +70,39 @@ v'_1 &= v_1\frac{\sqrt{m_1^2+m_2^2+2m_1m_2\cos \theta}}{m_1+m_2} \\
 v'_2 &= v_1\frac{2m_1}{m_1+m_2}\sin \frac{\theta}{2}.
 \end{align}$$
 
+### Two-dimensional collision with two moving objects
+The final x and y velocities components of the first ball can be calculated as:
+
+$$\begin{align}
+v'_{1x} &= \frac{v1\cos(\theta_1-\varphi)(m_1-m_2)+2m_2v2\cos(\theta_2-\varphi)}{m_1+m_2}\cos(\varphi)+v1\sin(\theta_1-\varphi)\cos(\varphi + \tfrac{\pi}{2})
+\end{align}$$
+
+$$\begin{align}
+v'_{1y} &= \frac{v1\cos(\theta_1-\varphi)(m_1-m_2)+2m_2v2\cos(\theta_2-\varphi)}{m_1+m_2}\sin(\varphi)+v1\sin(\theta_1-\varphi)\sin(\varphi + \tfrac{\pi}{2})
+\end{align}$$
+
+where v'<sub>1</sub> and v'<sub>2</sub> are the scalar sizes of the two original speeds of the objects, m'<sub>1</sub> and m'<sub>2</sub> are their masses, θ'<sub>1</sub> and θ'<sub>2</sub> are their movement angles, that is, $$v_{1x} = v_1\cos\theta_1,\$$ ; 
+$$v_{1y}=v_1\sin\theta_1$$ (meaning moving directly down to the right is either a −45° angle, or a 315° angle), and lowercase phi (φ) is the [[contact angle]]. (To get the x and y velocities of the second ball, one needs to swap all the '1' subscripts with '2' subscripts.)
+
+This equation is derived from the fact that the interaction between the two bodies is easily calculated along the contact angle, meaning the velocities of the objects can be calculated in one dimension by rotating the x and y axis to be parallel with the contact angle of the objects, and then rotated back to the original orientation to get the true x and y components of the velocities.
 
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/math1.png)
 
-The magnitudes of the velocities of the particles after the collision are:
+In an angle-free representation, the changed velocities are computed using the centers **x<sub>1</sub>** and **x<sub>2</sub>** at the time of contact as
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/math2.png)
+$$\begin{align}
+\mathbf{v}'_1 &= \mathbf{v}_1-\frac{2 m_2}{m_1+m_2} \ \frac{\langle \mathbf{v}_1-\mathbf{v}_2,\,\mathbf{x}_1-\mathbf{x}_2\rangle}{\|\mathbf{x}_1-\mathbf{x}_2\|^2} \ (\mathbf{x}_1-\mathbf{x}_2),
+\end{align}$$
 
-#### Two-dimensional collision with two moving objects
-The final x and y velocities components of the first ball can be calculated as
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/math3.png)
+$$\begin{align}
+\mathbf{v}'_2 &= \mathbf{v}_2-\frac{2 m_1}{m_1+m_2} \ \frac{\langle \mathbf{v}_2-\mathbf{v}_1,\,\mathbf{x}_2-\mathbf{x}_1\rangle}{\|\mathbf{x}_2-\mathbf{x}_1\|^2} \ (\mathbf{x}_2-\mathbf{x}_1)
+\end{align}$$
 
-Where `v1` and `v2` are the `scalar sizes` of the two original speeds of the objects,
-`m1` and `m2` are their masses, `Ɵ1` and `Ɵ2` are their movement angles, that is, 
-`v1x = v1cosƟ1`, `v1y = v1sinƟ1` (meaning moving directly down to the right is either
-a -45° angle, or a 315°angle), and lowercase `phi` (φ) is the contact angle. 
-(To get the x and y velocities of the second ball, one needs to swap all the '1'
-subscripts with '2' subscripts).
 
-This equation is derived from the fact that the interaction between the two bodies
-is easily calculated along the contact angle, meaning the velocities of the objects
-can be calculated in one dimension by rotating the x & y-axis to be parallel with
-the contact angle of the objects, and then rotated back to the original orientation
-to get the true x and y components of the velocities In an angle-free representation,
-the changed velocities are computed using the centers `x1` and `x2` at the time of contact
-as:
+### Other conserved quantities
+In the particular case of particles having equal masses, it can be verified by direct computation from the result above that the scalar product of the velocities before and after the collision are the same, that is $$<math>\langle \mathbf{v}'_1,\mathbf{v}'_2 \rangle = \langle \mathbf{v}_1,\mathbf{v}_2 \rangle.</math>$$ Although this product is not an additive invariant in the same way that momentum and kinetic energy are for elastic collisions, it seems that preservation of this quantity can nonetheless be used to derive higher-order conservation laws.
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/math4.png)
-
-Where the angle brackets indicate the inner product (or dot product) of two vectors.
 
 ## Elastic collision library
 
