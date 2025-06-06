@@ -57,8 +57,8 @@ Assuming that the second particle is at rest before the collision, the angles of
 deflection of the two particles, v1 and v2, are related to the angle of deflection
 theta in the system of the center of mass by
 
-Assuming that the second particle is at rest before the collision, the angles of deflection of the two particles, <math>\theta_1</math> and <math>\theta_2</math>, 
-are related to the angle of deflection <math>\theta</math> in the system of the center of mass by:
+Assuming that the second particle is at rest before the collision, the angles of deflection of the two particles, $$<math>\theta_1</math>$$ and $$<math>\theta_2</math>$$, 
+are related to the angle of deflection $$<math>\theta</math>$$ in the system of the center of mass by:
 
 $$\tan \theta_1=\frac{m_2 \sin \theta}{m_1+m_2 \cos \theta},\qquad
 \theta_2=\frac{{\pi}-{\theta}}{2}.$$
