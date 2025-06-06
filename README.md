@@ -104,73 +104,76 @@ $$\begin{align}
 In the particular case of particles having equal masses, it can be verified by direct computation from the result above that the scalar product of the velocities before and after the collision are the same, that is $$<math>\langle \mathbf{v}'_1,\mathbf{v}'_2 \rangle = \langle \mathbf{v}_1,\mathbf{v}_2 \rangle.</math>$$ Although this product is not an additive invariant in the same way that momentum and kinetic energy are for elastic collisions, it seems that preservation of this quantity can nonetheless be used to derive higher-order conservation laws.
 
 
-## Elastic collision library
+# Elastic Collision Library
 
-This library contains the following methods written in Cython and C language:
+This library provides efficient methods for resolving **2D elastic collisions**, implemented in **Cython** and **C** for high performance. It is designed to integrate seamlessly with **Python** and **Pygame**, enabling real-time simulations.
 
-1) **Trigonometry method**
-    This equation is derived from the fact that the interaction between the two bodies 
-    is easily calculated along the contact angle
-   
+## Included Methods
 
-2) **Angle free method**
-    In an angle-free representation, the changed velocities are computed using the 
-    centres x1 and x2 at the time of contact as
-   
-Those algorithms are intended to work with Python and Pygame, offering a fast solution for
-solving elastic collision in real time. This library can be used in various projects,
-2d Video game, Arcade game, demos such as particles simulation or live objects system
-that can interact with each others in a 2d cartesian space or game display.
+- **Trigonometric Method**  
+  This approach calculates the interaction between two bodies using the contact angle. It relies on trigonometric functions to determine the direction and magnitude of velocity changes after a collision.
 
-This library is not a particle engine as such, it offers different methods to resolve 
-collision process between objects. 
+- **Angle-Free Method**  
+  This method avoids angle calculations entirely. Instead, it computes the post-collision velocities using only vector operations (e.g., dot product) based on the positions of the object centers (`x₁` and `x₂`) at the moment of impact.
 
-Designed with simplicity, this library can be used
-to elaborate complex object interactions with a peace of mind.  
+## Key Features
 
-Angle free method is the fastest algorithm as it does not require trigonometric 
-functions such as (cos, acos, sin, atan2) in order to solve object's vector components.
-Angle free method rely on vector calculations instead such as (dot product etc) while 
-trigonometry method requires calculation of object's contact angle and angle theta at 
-point of contact prior solving object's resultant vectors v1 & v2.
+- Optimized for **real-time simulations** such as:
+  - 2D video games
+  - Arcade-style games
+  - Particle systems
+  - Interactive object systems in Cartesian space
 
-Considerations:
-```
+- Offers **fast and accurate collision resolution**, but is **not a full particle engine** — it focuses solely on the core logic required to resolve elastic collisions.
 
-* The elastic-collision algorithm must be call after the object's collision.
+## Design Philosophy
 
-* You have the choice between ec_game & ec_real. These libraries are essentially 
-  identical except for ec_game that offers the possibility to invert the final vectors 
-  trajectories using the flag `invert`. Inverting the flag will provide the correct
-  solution of the object collision if you were to draw the vectors on a 2d cartesian 
-  system (without the y-axis inverted). 
-  Do not set the flag to True for 2d video game environment (the flag is set to False
-  by default).
-  
-* Trigonometric method is less accurate than the angle free method due to angle 
-  approximation and due to the fact that the library is build on single 
-  precision (float) with an error margin of 1e-5
-  
-* Input vectors are not normalized to conserve the total Kinetic energy 
-```
+The library emphasizes **simplicity and performance**, allowing you to build complex object interactions with ease and confidence.
 
- ### Difference between a display and cartesian space:
- 
- If an object position is at the centre of the display, we would have to decrease its (Y) 
- value in order to move it upward and increase its (Y) value to move it downward. 
- In other words, the display's Y-axis is inverted and this has to be taken 
- into account in the elastic collision equations. 
- This can be easily implemented by reversing the (Y) vectors component for each object 
- before or after contact.
- 
+## Performance Note
+
+The **Angle-Free Method** is the fastest of the two, as it avoids computationally expensive trigonometric functions (`cos`, `sin`, `atan2`, etc.). It leverages vector math for collision resolution. In contrast, the **Trigonometric Method** requires calculating the contact angle and individual object angles before determining the resulting velocities (`v₁`, `v₂`).
+
+
+## Considerations
+
+- The elastic collision algorithm **must be called after detecting a collision** between objects.
+
+- You can choose between two modules: `ec_game` and `ec_real`. These libraries are functionally similar, with one key difference:
+  - `ec_game` includes an optional `invert` flag that allows you to invert the final velocity vectors.
+  - This is useful if you're visualizing vectors on a standard 2D Cartesian plane (with the y-axis pointing up).
+  - **Do not set `invert=True`** in typical 2D video game environments, where the y-axis is inverted. The default is `invert=False`.
+
+- The **Trigonometric Method** is generally less accurate than the **Angle-Free Method**, due to:
+  - Angle approximations
+  - Use of single-precision floats (`float`) in the library
+  - An associated error margin of approximately `1e-5`
+
+- **Input vectors are not normalized** in order to conserve total **kinetic energy** during collision resolution.
+
+
+ ### Difference Between Display Space and Cartesian Space
+
+In a typical display (such as a game screen), the **Y-axis is inverted** compared to the standard Cartesian coordinate system.
+
+If an object's position is at the center of the display:
+- Decreasing its Y value moves it **upward**
+- Increasing its Y value moves it **downward**
+
+In other words, the display coordinate system increases Y downward, whereas in Cartesian space, Y increases upward.  
+This inversion must be taken into account when applying elastic collision equations.
+
+A common solution is to **invert the Y component of velocity vectors** before or after collision resolution, depending on your coordinate system.
+
 ---
 
-* **Real domain R(x, y)**
+#### Real Domain: ℝ(x, y)
 
-Vector direction        | Resultant                |  Object centre       | 
-------------------------|--------------------------|----------------------|
-**v1( 0.707,  0.707)**  | **v1'(-0.707, -0.707)**  | **C1 ( 0, 0)**       |
-**v2(-0.707, -0.707)**  | **v2'( 0.707,  0.707)**  |**C2 (1.414, 1.414)** |
+| Vector Direction         | Resultant Velocity        | Object Center         |
+|--------------------------|---------------------------|------------------------|
+| **v₁ ( 0.707,  0.707 )** | **v₁′ (−0.707, −0.707 )** | **C₁ ( 0.000,  0.000 )** |
+| **v₂ (−0.707, −0.707 )** | **v₂′ ( 0.707,  0.707 )** | **C₂ ( 1.414,  1.414 )** |
+
 
 `figure 1`
 
