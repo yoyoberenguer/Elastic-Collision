@@ -222,17 +222,32 @@ Vector direction        | Resultant                |  Object centre         |
 
 ![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/GameDomain.PNG)
 
-As you can see both domains return the same values. 
-However, in the real cartesian domain the red ball will be moving at 45 degrees
-while and on the game display, the reb ball will be moving at -45 degrees. 
-`In order to convert one model to another`, we would have to invert the Y-component of 
-the solution provided by the elastic-collision equations such as :
 
-Vector direction        | Resultant                 |   y component inverted     |
-------------------------|---------------------------|----------------------------|
-**v1( 0.707, 0.707)**  | **v1'(-0.707,-0.707)**   | **v1'(-0.707, 0.707)**     |
-**v2(-0.707,-0.707)**  | **v2'( 0.707, 0.707)**   | **v2'( 0.707,-0.707)**   |
+## Converting Between Real Cartesian Space and 2D Game Display
 
+While the **elastic collision equations** return the same vector values in both coordinate systems, their visual interpretation differs due to axis orientation.
+
+In a **real Cartesian space ℝ(x, y)**:
+- Positive Y points **upward**
+- A velocity vector like `(0.707, 0.707)` moves the object **northeast**, at a **+45°** angle.
+
+In a **2D game display space**:
+- Positive Y points **downward**
+- The same vector will appear as moving **southeast**, visually interpreted as **−45°**.
+
+### Why This Matters:
+To preserve the correct physical behavior in a game engine, the **Y-components of all vectors must be inverted** when transitioning from Cartesian space to display space.
+
+### Example Conversion:
+
+| Vector Direction      | Resultant in ℝ(x, y)     | After Inverting Y-component |
+|-----------------------|--------------------------|------------------------------|
+| v₁ = ( 0.707,  0.707) | v₁′ = (−0.707, −0.707)   | v₁′ = (−0.707,  0.707)       |
+| v₂ = (−0.707, −0.707) | v₂′ = ( 0.707,  0.707)   | v₂′ = ( 0.707, −0.707)       |
+
+### How to Apply It:
+- After computing `v₁′` and `v₂′` using the elastic collision equations,
+- Simply multiply the **Y-components by −1**:
 
 * The project is under the `MIT license`
 
