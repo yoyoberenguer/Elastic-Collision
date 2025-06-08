@@ -180,6 +180,33 @@ A common solution is to **invert the Y component of velocity vectors** before or
 
 **![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/RealDomain.PNG)**
 
+This diagram illustrates a **2D elastic collision** between two circular objects, represented as colored spheres (C₁ and C₂), in a **top-down Cartesian space**.
+
+### Object Properties:
+
+- **C₁ (Blue Sphere)**
+  - Center: (0.000, 0.000)
+  - Initial Velocity `v₁ = (0.707, 0.707)` → Yellow arrow
+  - Resultant Velocity `v₁′ = (−0.707, −0.707)` → green arrow
+
+- **C₂ (Red Sphere)**
+  - Center: (1.414, 1.414)
+  - Initial Velocity `v₂ = (−0.707, −0.707)` → Red arrow
+  - Resultant Velocity `v₂′ = (0.707, 0.707)` → Green arrow
+
+### Key Notes:
+
+- The X and Y axes are shown using bold black arrows.
+- Vectors are labeled using LaTeX-like notation (v₁, v₂, v₁′, v₂′).
+- The collision conserves both momentum and kinetic energy.
+- The objects exchange velocities due to symmetry and equal mass.
+- A velocity component table is included on the right to show precise vector values.
+
+### Educational Use:
+
+- This image is suitable for explaining elastic collisions in physics lectures.
+- Ideal for use in presentations, simulation docs, or academic content.
+
 
 ---
 
