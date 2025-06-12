@@ -220,7 +220,7 @@ Vector direction        | Resultant                |  Object centre         |
 
 `Figure 2`
 
-![alt text](https://raw.githubusercontent.com/yoyoberenguer/Elastic-Collision/master/Assets/GameDomain.PNG)
+![alt text](https://github.com/yoyoberenguer/Elastic-Collision/blob/26c15da6369f236470123f50c4c2b55ccf9b6647/Assets/Improved_GameDomain.png)
 
 
 ## Converting Between Real Cartesian Space and 2D Game Display
