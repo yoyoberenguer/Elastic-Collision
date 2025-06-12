@@ -15,7 +15,7 @@ limit-inference-results=120
 
 # Minimum Python version to use for version dependent checks. Will default to
 # the version used to run pylint.
-py-version=3.6
+py-version=3.7
 
 disable=consider-using-f-string,too-many-lines,no-name-in-module,import-error,line-too-long,empty-docstring,raise-missing-from,consider-using-with,invalid-name,trailing-newlines,missing-module-docstring,duplicate-code
 
